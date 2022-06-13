@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +23,4 @@ Route::get('/home', function () {
     // return view('welcome');
     return view('landingpage.home');
 });
-
-Route::get('/user-list', function () {
-    // return view('welcome');
-    return view('user.index');
-});
-
+Route::resource('users', UserController::class);
