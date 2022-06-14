@@ -11,6 +11,6 @@ class users extends Model
     use HasFactory;
 
     protected $fillable = [
-        'fullname', 'role', 'username', 'email', 'telpon', 'alamat', 'password'
+        'fullname', 'role', 'username', 'email', 'telpon', 'alamat', 'password', 'foto'
     ];
 }
