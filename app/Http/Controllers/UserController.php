@@ -46,9 +46,20 @@ class UserController extends Controller
             'telpon' => 'required',
             'alamat' => 'required',
             'password' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        users::create($request->all());
+        
+        $input = $request->all();
+
+        if ($image = $request->file('foto')) {
+            $destinationPath = 'assets/img/avatars/';
+            $profileImage = date('YmHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['foto'] = "$profileImage";
+        }
+
+        users::create($input);
 
         return redirect()->route('users.index')
             ->with('success', 'Users created successfully.');
