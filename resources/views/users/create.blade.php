@@ -25,7 +25,7 @@
         </div>
     @endif
 
-    <form action="{{ route('users.store') }}" method="POST">
+    <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="container-fluid">
             <div class="row mx-1">
@@ -72,9 +72,15 @@
                         <input type="password" name="password" class="form-control" placeholder="password">
                     </div>
                 </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 my-1">
+                    <div class="form-group">
+                        <label for="foto" class="form-label"><strong>Foto: </strong><p>*foto tidak dapat diubah setelah dikirim</p></label>
+                        <input type="file" name="foto" class="form-control">
+                    </div>
+                </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center my-4">
-                <button type="submit" class="btn btn-success">Create</button>
+                <button type="submit" class="btn btn-success" name="proses">Create</button>
             </div>
         </div>
         </div>
