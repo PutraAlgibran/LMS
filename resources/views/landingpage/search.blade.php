@@ -48,12 +48,12 @@
                             </div>
                             <div class="flex-grow-1">
                                 @if (Auth::user() !== null)
-                                    <span class="fw-semibold d-block">{{ Auth::user()->nama }}</span>
-                                    <small class="text-muted">Admin</small>
+                                    <span class="fw-semibold d-block mt-2">{{ Auth::user()->fullname }}</span>
                                 @else
-                                    <span class="fw-semibold d-block mt-2">Login</span>
+                                    <a href="{{ route('login') }}">
+                                        <span class="fw-semibold d-block">Login</span>
+                                    </a>
                                 @endif
-
                             </div>
                         </div>
                     </a>
@@ -62,10 +62,12 @@
                     <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="{{ route('users.show', $user->id) }}">
-                        <i class="bx bx-user me-2"></i>
-                        <span class="align-middle">My Profile</span>
-                    </a>
+                    @if (Auth::user() !== null)
+                        <a class="dropdown-item" href="{{ route('users.show', Auth::user()->id) }}">
+                            <i class="bx bx-user me-2"></i>
+                            <span class="align-middle">My Profile</span>
+                        </a>
+                    @endif
                 </li>
                 <li>
                     <a class="dropdown-item" href="#">

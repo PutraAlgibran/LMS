@@ -24,12 +24,14 @@
             </a>
         </li>
 
-        <li class="menu-item">
-            <a href="{{ url('/users') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Analytics">Data User</div>
-            </a>
-        </li>
+        @if (Auth::user() !== null)
+            <li class="menu-item">
+                <a href="{{ url('/users') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Analytics">Data User</div>
+                </a>
+            </li>
+        @endif
 
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Pages</span>
