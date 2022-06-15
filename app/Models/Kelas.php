@@ -10,12 +10,8 @@ class Kelas extends Model
     public $table = "kelas";
     use HasFactory;
 
-    protected $fillable = [
-        'nama', 'jam_mulai', 'jam_berakhir', 'keterangan'
-    ];
-
-    public function activity()
+    public function materi()
     {
-        return $this->hasMany(Activity::class);
+        return $this->hasMany(Materi::class);
     }
 }
