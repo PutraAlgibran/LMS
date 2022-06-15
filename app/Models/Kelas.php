@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Materi extends Model
+class Kelas extends Model
 {
     use HasFactory;
-    protected $table = "materi";
+    protected $table = "kelas";
 
-    public function kelas(){
-        return $this->belongsTo(Kelas::class);
+    public function materi(){
+        return $this->hasMany(Materi::class);
     }
 }
