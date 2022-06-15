@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,7 +16,6 @@ class UserController extends Controller
     public function index()
     {
         $users = users::latest()->paginate(5);
-
         return view('users.index', compact('users'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -38,7 +38,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'fullname' => 'required',
             'role' => 'required',
             'username' => 'required',
@@ -49,7 +49,9 @@ class UserController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+
         $input = $request->all();
 
         if ($image = $request->file('foto')) {

@@ -27,7 +27,7 @@
 
     <div class="container-fluid">
         <div class="text-center">
-            <img src="{{ asset('assets/img/avatars/'.$user->foto) }}" class="rounded">
+            <img id="profile" src="{{ asset('assets/img/avatars/' . $user->foto) }}" class="rounded">
         </div>
         <div class="row mx-1">
             <div class="col-xs-12 col-sm-12 col-md-12 my-1">
