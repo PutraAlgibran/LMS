@@ -9,6 +9,7 @@ class Materi extends Model
 {
     use HasFactory;
     protected $table = "materi";
+    // 
 
     public function kelas(){
         return $this->belongsTo(Kelas::class);
