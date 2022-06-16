@@ -15,9 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = users::latest()->paginate(5);
+        $users = users::latest()->paginate(100);
         return view('users.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+            ->with('i', (request()->input('page', 1) - 1) * 100);
     }
 
     /**
@@ -51,17 +51,13 @@ class UserController extends Controller
 
         $validatedData['password'] = Hash::make($validatedData['password']);
 
-
-        $input = $request->all();
-
         if ($image = $request->file('foto')) {
             $destinationPath = 'assets/img/avatars/';
             $profileImage = date('YmHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
-            $input['foto'] = "$profileImage";
+            $validatedData['foto'] = "$profileImage";
         }
-
-        users::create($input);
+        users::create($validatedData);
 
         return redirect()->route('users.index')
             ->with('success', 'Users created successfully.');
