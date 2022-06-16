@@ -31,6 +31,12 @@
                     <div data-i18n="Analytics">Data User</div>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ url('/activity') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Analytics">Activity</div>
+                </a>
+            </li>
         @endif
     </ul>
 </aside>
