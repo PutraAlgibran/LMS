@@ -11,7 +11,7 @@ class Materi extends Model
     protected $table = "materi";
     // 
 
-    public function kelas(){
-        return $this->belongsTo(Kelas::class);
+    public function mactivity(){
+        return $this->hasMany(Activity::class);
     }
 }
