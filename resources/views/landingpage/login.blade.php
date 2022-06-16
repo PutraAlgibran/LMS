@@ -1,7 +1,6 @@
 @extends('landingpage.auth')
 @section('content')
     <!-- Content -->
-
     <div class="container-xxl">
         <div class="row justify-content-center my-5">
             <div class="col-lg-4">
@@ -10,7 +9,9 @@
                         <!-- Register -->
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="mb-2">Welcome to LMS! 👋</h4>
+                                <h4 class="mb-2 text-center">Welcome to LMS <span><img
+                                            src="{{ asset('assets/img/avatars/logo.png') }}" width="40" alt=""></span>
+                                </h4>
                                 <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
                                 <form id="formAuthentication" class="mb-3" action="/login" method="POST">
@@ -20,6 +21,11 @@
                                         <input type="text" class="form-control @error('username') is-invalid @enderror"
                                             id="username" name="username" placeholder="Enter your username" autofocus
                                             required value="{{ old('username') }}" />
+                                        @error('username')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="mb-3 form-password-toggle">
                                         <div class="d-flex justify-content-between">

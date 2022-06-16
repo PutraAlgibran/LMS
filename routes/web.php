@@ -17,15 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('welcome');
-    return view('landingpage.home');
+    return view('landingpage.login');
 });
-
-Route::get('/home', function () {
-    // return view('welcome');
-    return view('landingpage.home');
-});
-
-Route::resource('users', UserController::class);
 
 Route::get('/dashboard', function () {
     return view('index');
@@ -33,4 +26,12 @@ Route::get('/dashboard', function () {
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', function () {
+        // return view('welcome');
+        return view('landingpage.home');
+    });
+
+    Route::resource('users', UserController::class);
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});

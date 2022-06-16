@@ -33,7 +33,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{ route('login') }}">
                         <div class="d-flex">
                             <div class="flex-shrink-0 me-3">
                                 <div class="avatar avatar-online">
@@ -50,9 +50,7 @@
                                 @if (Auth::user() !== null)
                                     <span class="fw-semibold d-block mt-2">{{ Auth::user()->fullname }}</span>
                                 @else
-                                    <a href="{{ route('login') }}">
-                                        <span class="fw-semibold d-block">Login</span>
-                                    </a>
+                                    <span class="fw-semibold d-block mt-2">Login</span>
                                 @endif
                             </div>
                         </div>
