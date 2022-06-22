@@ -33,7 +33,7 @@ class ActivityController extends Controller
         $user = users::all();
         $tugas = Tugas::all();
 
-        return view('activity.create',compact('materi','user','tugas'));
+        return view('activity.create', compact('materi', 'user', 'tugas'));
     }
 
     /**
@@ -69,7 +69,7 @@ class ActivityController extends Controller
         $user = users::all();
         $tugas = Tugas::all();
 
-        return view('activity.create',compact('materi','user','tugas'));
+        return view('activity.show', compact('materi', 'user', 'tugas'));
     }
 
     /**
@@ -80,7 +80,7 @@ class ActivityController extends Controller
      */
     public function edit(Activity $activity)
     {
-        //
+        return view('activity.edit', compact('materi', 'user', 'tugas'));
     }
 
     /**

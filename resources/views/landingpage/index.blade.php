@@ -31,6 +31,9 @@
 
     <meta name="description" content="" />
 
+    <!-- // evo-calendar.css, followed by [theme-name].css (optional) --><!-- Add the evo-calendar.css for styling -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/avatars/logo.png') }}"/>
     {{-- Bootstrap Icon --}}
@@ -69,6 +72,9 @@
       #profile{
         max-width: 200px;
       }
+      #calendar{
+        width: 100%;
+      }
     </style>
   </head>
 
@@ -106,6 +112,7 @@
 <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
@@ -127,5 +134,18 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
+    <!-- Add jQuery library Calendar (required) --><!-- Add jQuery library (required) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+
+    <!-- Add the evo-calendar.js for.. obviously, functionality! -->
+    <script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
+    <script>
+        // initialize your calendar, once the page's DOM is ready
+        $(document).ready(function() {
+            $('#calendar').evoCalendar({})
+        })
+    </script>
   </body>
 </html>

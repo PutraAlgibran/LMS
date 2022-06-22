@@ -10,8 +10,10 @@ class Materi extends Model
     use HasFactory;
     protected $table = "materi";
     // 
+    protected $guarded = ['id'];
 
-    public function mactivity(){
+    public function activity()
+    {
         return $this->hasMany(Activity::class);
     }
 }

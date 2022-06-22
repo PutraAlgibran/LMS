@@ -26,7 +26,7 @@
                     <thead class="table-dark">
                         <tr>
                             <th class="text-center">No</th>
-                            <th>Nama</th>
+                            <th>Nama Kegiatan</th>
                             <th>Materi</th>
                             <th>User</th>
                             <th>Tugas</th>
@@ -42,10 +42,10 @@
                                 <td>{{ $act->user->fullname }}</td>
                                 <td>{{ $act->tugas->nama }}</td>
                                 <td class="text-center">
-                                    <form action="" method="POST">
-                                        <a class="btn btn-info" href=""><i
+                                    <form action="{{ route('activity.destroy', $act->id) }}" method="POST">
+                                        <a class="btn btn-info" href="{{ route('activity.show', $act->id) }}"><i
                                                 class="bi bi-eye pe-2"></i>Details</a>
-                                        <a class="btn btn-primary" href=""><i
+                                        <a class="btn btn-primary" href="{{ route('activity.edit', $act->id) }}"><i
                                                 class="bi bi-pencil-square pe-2"></i>Edit</a>
 
                                         @csrf
