@@ -16,4 +16,8 @@ class Materi extends Model
     {
         return $this->hasMany(Activity::class);
     }
+
+    public function guru(){
+        return $this->belongsTo(Guru::class);
+    }
 }
