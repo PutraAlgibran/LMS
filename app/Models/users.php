@@ -13,7 +13,8 @@ class users extends Model
     protected $guarded = ['id'];
     // Atau bisa pakai 
     // protected $guarde = ['id'];
-    public function uactivity(){
+    public function activity()
+    {
         return $this->hasMany(Activity::class);
     }
 }

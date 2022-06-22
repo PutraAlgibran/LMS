@@ -43,7 +43,7 @@ class UserController extends Controller
             'role' => 'required',
             'username' => 'required',
             'email' => 'required',
-            'telpon' => 'required',
+            'telpon' => 'required|numeric',
             'alamat' => 'required',
             'password' => 'required',
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -94,17 +94,19 @@ class UserController extends Controller
      */
     public function update(Request $request, users $user)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'fullname' => 'required',
             'role' => 'required',
             'username' => 'required',
             'email' => 'required',
-            'telpon' => 'required',
+            'telpon' => 'required|numeric',
             'alamat' => 'required',
             'password' => 'required',
         ]);
 
-        $user->update($request->all());
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        users::create($validatedData);
 
         return redirect()->route('users.index')
             ->with('success', 'Users updated successfully');

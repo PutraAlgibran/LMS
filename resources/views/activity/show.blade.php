@@ -24,37 +24,30 @@
             </ul>
         </div>
     @endif
-
     <div class="container-fluid">
         <div class="row mx-1">
             <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                 <div class="form-group">
-                    <label for="nim" class="form-label"><strong>Fullname:</strong></label>
-                    <h3>{{ $user->fullname }}</h3>
+                    <label for="nim" class="form-label"><strong>Guru:</strong></label>
+                    <h3>{{ $activity->nama }}</h3>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                 <div class="form-group">
-                    <label for="name" class="form-label"><strong>Role:</strong></label>
-                    <h3>{{ $user->role }}</h3>
+                    <label for="name" class="form-label"><strong>Materi:</strong></label>
+                    <h3>{{ $activity->materi->nama }}</h3>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                 <div class="form-group">
-                    <label for="alamat" class="form-label"><strong>Email: </strong></label>
-                    <h3>{{ $user->email }}</h3>
+                    <label for="alamat" class="form-label"><strong>Nama Siswa: </strong></label>
+                    <h3>{{ $activity->user->fullname }}</h3>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                 <div class="form-group">
-                    <label for="email" class="form-label"><strong>Telpon: </strong></label>
-                    <h3>{{ $user->telpon }}</h3>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 my-1 mb-5">
-                <div class="form-group">
-                    <label for="email" class="form-label"><strong>Alamat: </strong></label>
-                    <h3>{{ $user->alamat }}</h3>
+                    <label for="email" class="form-label"><strong>Tugas: </strong></label>
+                    <h3>{{ $activity->tugas->nama }}</h3>
                 </div>
             </div>
         </div>
