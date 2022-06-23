@@ -23,12 +23,6 @@
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="{{ url('/home') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-            </a>
-        </li>
         @if (Auth::user()->fullname == 'Admin Utama')
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Pages</span>
@@ -43,6 +37,35 @@
                 <a href="{{ url('/users') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i18n="Analytics">Data User</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                    <div data-i18n="Account Settings">Materi</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item">
+                        <a href="{{ url('/materiGuru') }}" class="menu-link">
+                            <div data-i18n="Account">Kelas A</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="pages-account-settings-notifications.html" class="menu-link">
+                            <div data-i18n="Notifications">Kelas B</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="pages-account-settings-connections.html" class="menu-link">
+                            <div data-i18n="Connections">Kelas C</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a href="{{ url('/materiUser') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Analytics">Materi User</div>
                 </a>
             </li>
             <li class="menu-item">
@@ -108,6 +131,12 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+            <li class="menu-item">
+                <a href="" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Analytics">Logout</div>
+                </a>
             </li>
             <!-- Components -->
         @endif
