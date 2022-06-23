@@ -15,10 +15,22 @@
                     </div>
                 </div>
             </div>
-            <div align="right">
-                <a class="btn btn-success me-5" href="{{ route('users.create') }}">
-                    <i class="bi bi-plus-lg pe-2"></i>Tambah User
-                </a>
+            <div class="row">
+                <div class="col-4 ps-4">
+                    <a href="{{ url('generate-pdf') }}" type="button" class="btn btn-danger btn-icon-text mr-3">
+                        Tes PDF
+                        <i class="typcn typcn-folder btn-icon-append"></i>
+                    </a>
+                    <a href="{{ url('users-pdf') }}" type="button" class="btn btn-success btn-icon-text mr-3">
+                        Unduh Users
+                        <i class="typcn typcn-folder btn-icon-append"></i>
+                    </a>
+                </div>
+                <div class="col-8" align="right">
+                    <a class="btn btn-success me-3" href="{{ route('users.create') }}">
+                        <i class="bi bi-plus-lg pe-2"></i>Tambah User
+                    </a>
+                </div>
             </div>
             <br>
             <div class="table-responsive text-nowrap">
@@ -51,6 +63,10 @@
 
                                         <button type="submit" class="btn btn-danger"><i
                                                 class="bi bi-trash3 pe-2"></i>Delete</button>
+
+                                        {{-- <a href="/users-delete/{{ $user->id }}"
+                                            class="btn btn-danger btn-sm delete-confirm" role="button"> Delete <i
+                                                class="typcn typcn-delete-outline btn-icon-append"></i> </a> --}}
                                     </form>
                                 </td>
                             </tr>
