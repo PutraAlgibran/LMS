@@ -19,6 +19,10 @@ class users extends Model
     }
 
     public function guru(){
-        return $this->belongsTo(Guru::class);
+        return $this->hasMany(Guru::class);
+    }
+
+    public function absensi(){
+        return $this->hasOne(Absensi::class, 'user_id','id');
     }
 }

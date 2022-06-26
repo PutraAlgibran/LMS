@@ -15,6 +15,6 @@ class Guru extends Model
     }
 
     public function user(){
-        return $this->hasMany(user::class);
+        return $this->belongsTo(user::class);
     }
 }

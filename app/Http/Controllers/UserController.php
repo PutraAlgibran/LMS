@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ResponseFormatter;
 use PDF;
 use App\Models\users;
 use Illuminate\Http\Request;
@@ -186,5 +187,31 @@ class UserController extends Controller
         $pdf = PDF::loadView('users/usersPDF', ['data' => $data]);
 
         return $pdf->download(date('d/m/y') . '_data_users.pdf');
+    }
+
+    public function all(Request $request)
+    {
+        $id = $request->input('id');
+        if ($id) {
+            $id_user = users::find($id);
+            if ($id_user) {
+                return ResponseFormatter::success(
+                    $id_user,
+                    'Data User Berhasil ditampilkan'
+                );
+            } else {
+                return ResponseFormatter::error(
+                    null,
+                    'Data User Gagal ditampilkan',
+                    404
+                );
+            }
+        }
+
+        $user = users::all();
+        return ResponseFormatter::success(
+            $user,
+            'Data User Berhasil Ditampilkan'
+        );
     }
 }
