@@ -33,6 +33,7 @@
 
     <!-- // evo-calendar.css, followed by [theme-name].css (optional) --><!-- Add the evo-calendar.css for styling -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/evo-calendar.royal-navy.min.css') }}"/>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/avatars/logo.png') }}"/>
@@ -79,7 +80,7 @@
   </head>
 
   <body>
-    
+@include('sweetalert::alert')
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
@@ -144,7 +145,9 @@
     <script>
         // initialize your calendar, once the page's DOM is ready
         $(document).ready(function() {
-            $('#calendar').evoCalendar({})
+            $('#calendar').evoCalendar({
+                theme: 'Royal Navy',
+            })
         })
     </script>
   </body>

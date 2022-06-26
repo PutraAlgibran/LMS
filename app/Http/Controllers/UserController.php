@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -46,21 +47,29 @@ class UserController extends Controller
             'telpon' => 'required|numeric',
             'alamat' => 'required',
             'password' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         if ($image = $request->file('foto')) {
             $destinationPath = 'assets/img/avatars/';
-            $profileImage = date('YmHis') . "." . $image->getClientOriginalExtension();
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
             $validatedData['foto'] = "$profileImage";
         }
-        users::create($validatedData);
 
-        return redirect()->route('users.index')
-            ->with('success', 'Users created successfully.');
+        try {
+            users::create($validatedData);
+
+            //return redirect()->back()
+            return redirect()->route('users.index')
+                ->with('success', 'Users Created successfully!');
+        } catch (\Exception $e) {
+            //return redirect()->back()
+            return redirect()->back()
+                ->with('error', 'Error during the creation!');
+        }
     }
 
     /**
@@ -106,10 +115,37 @@ class UserController extends Controller
 
         $validatedData['password'] = Hash::make($validatedData['password']);
 
-        users::create($validatedData);
+        //--------proses update data lama & upload file foto baru--------
+        $image = $request->file('foto');
+        if (!empty($image)) //kondisi akan upload foto baru
+        {
+            $request->validate([
+                'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            if (!empty($user->foto)) { //kondisi ada nama file foto di tabel
+                //hapus foto lama
+                unlink('assets/img/avatars/' . $user->foto);
+            }
+            //proses upload foto baru
+            $destinationPath = 'assets/img/avatars/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            //print_r($profileImage); die();
+            $image->move($destinationPath, $profileImage);
+            $validatedData['foto'] = "$profileImage";
+        } else //kondisi user hanya update data saja, bukan ganti foto
+        {
+            $validatedData['foto'] = $user->foto; //nama file foto masih yg lama
+        }
 
-        return redirect()->route('users.index')
-            ->with('success', 'Users updated successfully');
+        try {
+            $user->update($validatedData);
+            //return redirect()->back()
+            return redirect()->route('users.index')
+                ->with('success', 'Users updated successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error during the creation!');
+        }
     }
 
     /**
@@ -120,9 +156,35 @@ class UserController extends Controller
      */
     public function destroy(users $user)
     {
+        //--------hapus dulu fisik file foto--------
+        if (!empty($user->foto)) {
+            unlink('assets/img/avatars/' . $user->foto);
+        }
+
         $user->delete();
 
         return redirect()->route('users.index')
             ->with('success', 'Users deleted successfully');
+    }
+    public function generatePDF()
+    {
+        $data = [
+            'title' => 'Tes Export to PDF Using Barryvdh Ext',
+            'date' => date('m/d/Y')
+        ];
+
+        $pdf = PDF::loadView('users/myPDF', $data);
+
+        return $pdf->download('hasil_exportToPdf.pdf');
+    }
+
+    public function usersPDF()
+    {
+        $data = users::all();
+        //dd($data);
+
+        $pdf = PDF::loadView('users/usersPDF', ['data' => $data]);
+
+        return $pdf->download(date('d/m/y') . '_data_users.pdf');
     }
 }

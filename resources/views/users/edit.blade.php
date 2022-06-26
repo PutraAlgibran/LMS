@@ -7,11 +7,6 @@
                     <h2>Edit Data User</h2>
                 </div>
             </div>
-            <div class="col-12">
-                <div style="float: right">
-                    <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
-                </div>
-            </div>
         </div>
     </div>
     @if ($errors->any())
@@ -51,8 +46,8 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                     <div class="form-group">
                         <label for="email" class="form-label"><strong>Email: </strong></label>
-                        <input type="email" name="email" class="form-control" id="email" value="{{ $user->email }}"
-                            aria-describedby="emailHelp">
+                        <input type="email" name="email" class="form-control" id="email"
+                            value="{{ $user->email }}" aria-describedby="emailHelp">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
@@ -74,9 +69,19 @@
                         <input type="password" name="password" class="form-control" value="{{ $user->password }}">
                     </div>
                 </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 my-1">
+                    <div class="form-group">
+                        <label for="foto" class="form-label"><strong>Foto: </strong>
+                            <p>*foto tidak dapat diubah setelah dikirim</p>
+                        </label>
+                        <input type="file" class="form-control" name="foto" />
+                    </div>
+                </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center my-4">
-                <button type="submit" class="btn btn-success">Update</button>
+                <button type="submit" class="btn btn-success" name="proses">Update</button>
+
+                <a href="{{ url('home') }}" class="btn btn-success">Batal</a>
             </div>
         </div>
         </div>
