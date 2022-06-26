@@ -49,3 +49,5 @@ Route::middleware(['auth'])->group(function () {
 Route::get('generate-pdf', [UserController::class, 'generatePDF']);
 // routing url untuk mengunduh data buku dalam format PDF di BukuController, tepatnya di fungsi bukuPDF.
 Route::get('users-pdf', [UserController::class, 'usersPDF']);
+// routing url untuk mengunduh data user dalam format EXCEL
+Route::get('users-excel', [UserController::class, 'usersExcel']);
