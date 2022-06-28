@@ -169,6 +169,8 @@ return [
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         // Export PDF
         Barryvdh\DomPDF\ServiceProvider::class,
+        // Export Excel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -236,6 +238,8 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         // Sweet Alert
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        // Export Excel
+        'Excel' => Maatwebsite\Excel\Facade\Excel::class,
     ],
 
 ];

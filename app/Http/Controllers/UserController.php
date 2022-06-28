@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseFormatter;
+use DB;
 use PDF;
 use App\Models\users;
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -187,6 +190,11 @@ class UserController extends Controller
         $pdf = PDF::loadView('users/usersPDF', ['data' => $data]);
 
         return $pdf->download(date('d/m/y') . '_data_users.pdf');
+    }
+    
+    public function usersExcel()
+    {
+        return Excel::download(new UserExport, 'user.xlsx');
     }
 
     public function all(Request $request)

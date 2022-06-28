@@ -16,17 +16,21 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-4 ps-4">
+                <div class="col-6 ps-4">
                     <a href="{{ url('generate-pdf') }}" type="button" class="btn btn-danger btn-icon-text mr-3">
                         Tes PDF
                         <i class="typcn typcn-folder btn-icon-append"></i>
                     </a>
                     <a href="{{ url('users-pdf') }}" type="button" class="btn btn-success btn-icon-text mr-3">
-                        Unduh Users
+                        Unduh Users (PDF)
+                        <i class="typcn typcn-folder btn-icon-append"></i>
+                    </a>
+                    <a href="{{ url('users-excel') }}" type="button" class="btn btn-primary btn-icon-text mr-3">
+                        Unduh Users (Excel)
                         <i class="typcn typcn-folder btn-icon-append"></i>
                     </a>
                 </div>
-                <div class="col-8" align="right">
+                <div class="col-6" align="right">
                     <a class="btn btn-success me-3" href="{{ route('users.create') }}">
                         <i class="bi bi-plus-lg pe-2"></i>Tambah User
                     </a>
