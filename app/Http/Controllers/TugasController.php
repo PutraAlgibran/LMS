@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\ResponseFormatter;
-use App\Models\Absensi;
+use App\Models\Tugas;
 use Illuminate\Http\Request;
 
-class AbsensiController extends Controller
+class TugasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,10 +41,10 @@ class AbsensiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Absensi  $absensi
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Absensi $absensi)
+    public function show($id)
     {
         //
     }
@@ -53,10 +52,10 @@ class AbsensiController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Absensi  $absensi
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Absensi $absensi)
+    public function edit($id)
     {
         //
     }
@@ -65,10 +64,10 @@ class AbsensiController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Absensi  $absensi
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Absensi $absensi)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,18 +75,21 @@ class AbsensiController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Absensi  $absensi
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Absensi $absensi)
+    public function destroy($id)
     {
         //
     }
 
-    public function all(){
-        $data = Absensi::with(['user']);
-        return response()->json($data->paginate(), 200);
-     }
+    public function all()
+    {
+        $data = Tugas::get();
+        return response()->json([
+            'status' => 'Data Tugas Berhasil Ditampilkan',
+            'data' => $data,
 
-    
+        ], 200);
+    }
 }

@@ -12,12 +12,17 @@ class Materi extends Model
     // 
     protected $guarded = ['id'];
 
-    public function activity()
+    public function guru()
     {
-        return $this->hasMany(Activity::class);
+        return $this->hasOne(Guru::class, 'id', 'guru_id');
     }
 
-    public function guru(){
-        return $this->belongsTo(Guru::class);
+    public function activity()
+    {
+        return $this->hasMany(Activity::class, 'id', 'materi_id');
+    }
+    public function kelas()
+    {
+        return $this->hasMany(Kelas::class, 'id', 'materi_id');
     }
 }

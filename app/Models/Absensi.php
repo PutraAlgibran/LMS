@@ -10,7 +10,7 @@ class Absensi extends Model
     use HasFactory;
     protected $table = "absensi";
 
-    public function users(){
-        return $this->belongsTo(users::class, 'user_id', 'id');
+    public function user(){
+        return $this->hasOne(users::class, 'id', 'user_id');
     }
 }

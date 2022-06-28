@@ -84,4 +84,9 @@ class MateriController extends Controller
     {
         //
     }
+
+    public function all(){
+        $data = Materi::with(['guru']);
+        return response()->json($data->paginate(), 200);
+     }
 }

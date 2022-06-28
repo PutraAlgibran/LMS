@@ -106,5 +106,10 @@ class ActivityController extends Controller
         //
     }
 
+    public function all(){
+        $data = Activity::with(['user','tugas','materi']);
+        return response()->json($data->paginate(), 200);
+     }
+
     
 }
