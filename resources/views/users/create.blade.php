@@ -37,8 +37,14 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                     <div class="form-group">
-                        <label for="role" class="form-label"><strong>Role: </strong></label>
-                        <input type="text" name="role" class="form-control" placeholder="Staff">
+                        <label for="role" class="form-label">Role: </label>
+                        <select class="form-select" id="role" aria-label="Default select example" name="role">
+                            <option selected>Select the role</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Staff">Staff</option>
+                            <option value="Guru">Guru</option>
+                            <option value="Murid">Murid</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
@@ -50,14 +56,14 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                     <div class="form-group">
                         <label for="email" class="form-label"><strong>Email: </strong></label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="example@gmail.com"
-                            aria-describedby="emailHelp">
+                        <input type="email" name="email" class="form-control" id="email"
+                            placeholder="example@gmail.com" aria-describedby="emailHelp">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                     <div class="form-group">
                         <label for="telpon" class="form-label"><strong>Telpon: </strong></label>
-                        <input type="number" maxlength="12" name="telpon" class="form-control" placeholder="087879192911">
+                        <input type="text" maxlength="12" name="telpon" class="form-control" placeholder="087879192911">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
@@ -74,7 +80,9 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                     <div class="form-group">
-                        <label for="foto" class="form-label"><strong>Foto: </strong><p>*foto tidak dapat diubah setelah dikirim</p></label>
+                        <label for="foto" class="form-label"><strong>Foto: </strong>
+                            <p>*foto tidak dapat diubah setelah dikirim</p>
+                        </label>
                         <input type="file" name="foto" class="form-control">
                     </div>
                 </div>

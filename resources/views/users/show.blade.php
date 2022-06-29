@@ -63,10 +63,6 @@
                                         <h3>{{ $user->fullname }}</h3>
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="email" class="form-label">E-mail</label>
-                                        <h3>{{ $user->email }}</h3>
-                                    </div>
-                                    <div class="mb-3 col-md-6">
                                         <label for="organization" class="form-label">Status</label>
                                         <h3>{{ $user->role }}</h3>
                                     </div>

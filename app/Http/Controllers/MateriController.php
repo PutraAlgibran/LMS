@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Materi;
+use App\Models\Guru;
+use App\Models\Tugas;
 use Illuminate\Http\Request;
 
 class MateriController extends Controller
@@ -83,5 +85,14 @@ class MateriController extends Controller
     public function destroy(Materi $materi)
     {
         //
+    }
+
+    public function loopUser()
+    {
+        $materi = Materi::all();
+        $guru = Guru::all();
+        $tugas = Tugas::all();
+
+        return view('landingpage.materiUser', compact('materi', 'guru', 'tugas'));
     }
 }

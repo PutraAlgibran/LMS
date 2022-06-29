@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('users.create', ['user' => users::all()]);
     }
 
     /**
@@ -191,7 +191,7 @@ class UserController extends Controller
 
         return $pdf->download(date('d/m/y') . '_data_users.pdf');
     }
-    
+
     public function usersExcel()
     {
         return Excel::download(new UserExport, 'user.xlsx');

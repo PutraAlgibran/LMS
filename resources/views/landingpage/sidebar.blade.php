@@ -29,7 +29,7 @@
                 <div data-i18n="Analytics">My Profile</div>
             </a>
         </li>
-        @if (Auth::user()->fullname == 'Admin Utama')
+        @if (Auth::user()->role == 'Admin')
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Pages</span>
             </li>
