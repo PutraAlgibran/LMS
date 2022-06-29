@@ -18,13 +18,16 @@ class Activity extends Model
     ];
     // 
 
-    public function materi(){
-        return $this->belongsTo(Materi::class);
+    public function user()
+    {
+        return $this->belongsTo(users::class, 'user_id', 'id');
     }
-    public function tugas(){
-        return $this->belongsTo(Tugas::class);
+    public function materi()
+    {
+        return $this->belongsTo(Materi::class, 'materi_id', 'id');
     }
-    public function user(){
-        return $this->belongsTo(users::class);
+    public function tugas()
+    {
+        return $this->belongsTo(Tugas::class, 'tugas_id', 'id');
     }
 }

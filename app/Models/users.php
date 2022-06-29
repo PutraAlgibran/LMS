@@ -13,16 +13,16 @@ class users extends Model
     protected $guarded = ['id'];
     // Atau bisa pakai 
     // protected $guarde = ['id'];
-    public function activity()
-    {
-        return $this->hasMany(Activity::class);
+
+    public function absensi(){
+        return $this->belongsTo(Absensi::class,'user_id', 'id');
     }
 
     public function guru(){
-        return $this->hasMany(Guru::class);
+        return $this->belongsTo(Guru::class,'user_id', 'id');
     }
 
-    public function absensi(){
-        return $this->hasOne(Absensi::class, 'user_id','id');
+    public function activity(){
+        return $this->hasMany(Activity::class, 'id', 'user_id');
     }
 }

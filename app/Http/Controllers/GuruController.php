@@ -82,4 +82,9 @@ class GuruController extends Controller
     {
         //
     }
+
+    public function all(){
+        $data = Guru::with(['user','materi']);
+        return response()->json($data->paginate(), 200);
+     }
 }

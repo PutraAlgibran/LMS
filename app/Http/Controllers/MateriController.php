@@ -87,12 +87,9 @@ class MateriController extends Controller
         //
     }
 
-    public function loopUser()
+    public function all()
     {
-        $materi = Materi::all();
-        $guru = Guru::all();
-        $tugas = Tugas::all();
-
-        return view('landingpage.materiUser', compact('materi', 'guru', 'tugas'));
+        $data = Materi::with(['guru']);
+        return response()->json($data->paginate(), 200);
     }
 }

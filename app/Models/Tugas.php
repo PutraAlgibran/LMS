@@ -12,7 +12,7 @@ class Tugas extends Model
     protected $table = "tugas";
     // 
 
-    public function tactivity(){
-        return $this->hasMany(Activity::class);
+    public function activity(){
+        return $this->hasMany(Activity::class, 'id', 'tugas_id');
     }
 }

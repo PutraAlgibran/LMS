@@ -82,4 +82,9 @@ class KelasController extends Controller
     {
         //
     }
+
+    public function all(){
+        $data = Kelas::with(['materi']);
+        return response()->json($data->paginate(), 200);
+     }
 }
