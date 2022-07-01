@@ -14,15 +14,15 @@ class Materi extends Model
 
     public function guru()
     {
-        return $this->hasOne(Guru::class, 'id', 'guru_id');
+        return $this->belongsToMany(Guru::class);
     }
 
     public function activity()
     {
-        return $this->hasMany(Activity::class, 'id', 'materi_id');
+        return $this->hasMany(Activity::class);
     }
     public function kelas()
     {
-        return $this->hasMany(Kelas::class, 'id', 'materi_id');
+        return $this->hasMany(Kelas::class);
     }
 }

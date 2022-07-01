@@ -28,7 +28,10 @@ class MateriController extends Controller
      */
     public function create()
     {
-        //
+        $materi = Materi::all();
+        $tugas = Tugas::all();
+        $guru = Guru::all();
+        return view('landingpage.materiUser', compact(array('materi', 'guru', 'tugas')));
     }
 
     /**

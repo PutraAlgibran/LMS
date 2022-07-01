@@ -12,7 +12,8 @@ class Kelas extends Model
 
     protected $guarded = ['id'];
 
-    public function materi(){
-        return $this->belongsTo(Materi::class, 'materi_id', 'id');
+    public function materi()
+    {
+        $this->belongsToMany(Materi::class);
     }
 }

@@ -40,9 +40,7 @@ Route::middleware(['auth'])->group(function () {
         // return view('welcome');
         return view('landingpage.home');
     });
-
     Route::resource('users', UserController::class);
-    Route::resource('activity', ActivityController::class);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 // routing url untuk mencoba vendor PDF di BukuController, tepatnya di fungsi generatePDF

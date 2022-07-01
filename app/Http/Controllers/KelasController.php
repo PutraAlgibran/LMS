@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Materi;
+use App\Models\Guru;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 
@@ -83,8 +85,17 @@ class KelasController extends Controller
         //
     }
 
-    public function all(){
+    public function all()
+    {
         $data = Kelas::with(['materi']);
         return response()->json($data->paginate(), 200);
-     }
+    }
+    public function kelas()
+    {
+
+        $materi = Materi::all();
+        $kelas = Kelas::all();
+        $guru = Guru::all();
+        return view('landingpage.materiUser', compact(array('materi', 'guru', 'tugas')));
+    }
 }
