@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\users;
 
 class LoginController extends Controller
 {
@@ -21,10 +22,19 @@ class LoginController extends Controller
             'password' => ['required']
         ]);
         if (Auth::attempt($credentials)) {
+            $user = users::where('username', $request->username)->first();
+            // $request->session()->put('role', $user->role);
             $request->session()->regenerate();
             return redirect()->intended('/home');
         }
         return back()->with('loginError', 'Login failed');
+    }
+
+    public function dashboard()
+    {
+        if (session()->has('_token')) {
+            return view('landingpage.home');
+        }
     }
 
     public function logout()

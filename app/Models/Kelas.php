@@ -14,6 +14,10 @@ class Kelas extends Model
 
     public function materi()
     {
-        $this->belongsToMany(Materi::class);
+        return $this->belongsToMany(Materi::class, 'materi_kelas');
+    }
+    public function guru()
+    {
+        return $this->belongsToMany(Guru::class, 'materi_kelas');
     }
 }

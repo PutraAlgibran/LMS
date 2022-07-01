@@ -10,11 +10,17 @@ class Guru extends Model
     use HasFactory;
     protected $table = 'guru';
 
-    public function user(){
-        return $this->belongsTo(users::class,'user_id', 'id');
+    public function user()
+    {
+        return $this->belongsTo(users::class, 'user_id', 'id');
     }
 
-    public function materi(){
-        return $this->belongsTo(Materi::class,'guru_id', 'id');
+    public function materi()
+    {
+        return $this->belongsToMany(Materi::class);
+    }
+    public function kelas()
+    {
+        return $this->belongsToMany(Kelas::class);
     }
 }

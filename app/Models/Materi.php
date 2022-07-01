@@ -14,7 +14,7 @@ class Materi extends Model
 
     public function guru()
     {
-        return $this->belongsToMany(Guru::class);
+        return $this->belongsToMany(Guru::class, 'materi_kelas');
     }
 
     public function activity()
@@ -23,6 +23,6 @@ class Materi extends Model
     }
     public function kelas()
     {
-        return $this->hasMany(Kelas::class);
+        return $this->belongsToMany(Kelas::class, 'materi_kelas');
     }
 }

@@ -93,9 +93,16 @@ class KelasController extends Controller
     public function kelas()
     {
 
-        $materi = Materi::all();
-        $kelas = Kelas::all();
-        $guru = Guru::all();
-        return view('landingpage.materiUser', compact(array('materi', 'guru', 'tugas')));
+        $materi = Materi::get();
+        // $kelas = Kelas::find(1)->materi;
+        // dd($materi->kelas);
+        // foreach ($materi as $key => $m) {
+        //     // foreach ($m->kelas as $k => $kelas) {
+        //     //     echo $kelas->guru[$k]->nama . "<br>";
+        //     // }
+        //     echo $m->kelas[$key]->guru[0]->nama;
+        // }
+        // die;
+        return view('materidanTugas.materiUser', compact('materi'));
     }
 }
