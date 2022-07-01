@@ -5,7 +5,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    <div class="container-fluid">
+    <div class="container-xxl flex-grow-1 container-p-y">
         <div class="card" padding="20px">
             <br>
             <div class="row">

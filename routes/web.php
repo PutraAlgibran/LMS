@@ -26,11 +26,19 @@ Route::get('/dashboard', function () {
 });
 
 Route::get('/materiUser', function () {
-    return view('landingpage.materiUser');
+    return view('materidanTugas.materiUser');
+});
+
+Route::get('/detailMateri', function () {
+    return view('materidanTugas.detailMateri');
+});
+
+Route::get('/detailTugas', function () {
+    return view('materidanTugas.detailTugas');
 });
 
 Route::get('/materiGuru', function () {
-    return view('landingpage.materiGuru');
+    return view('materidanTugas.materiGuru');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');

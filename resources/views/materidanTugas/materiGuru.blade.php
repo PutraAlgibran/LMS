@@ -11,13 +11,13 @@
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div align="center">
-                        <h3 class="display-3">Kegiatan Pembelajaran</h3>
+                        <h3 class="display-3">Daftar User</h3>
                     </div>
                 </div>
             </div>
             <div align="right">
-                <a class="btn btn-success me-5" href="{{ route('activity.create') }}">
-                    <i class="bi bi-plus-lg pe-2"></i>Tambah Kegiatan
+                <a class="btn btn-success me-5" href="">
+                    <i class="bi bi-plus-lg pe-2"></i>Tambah User
                 </a>
             </div>
             <br>
@@ -26,26 +26,23 @@
                     <thead class="table-dark">
                         <tr>
                             <th class="text-center">No</th>
-                            <th>Nama Kegiatan</th>
-                            <th>Materi</th>
-                            <th>User</th>
-                            <th>Tugas</th>
+                            <th>Fullname</th>
+                            <th>Username</th>
+                            <th>Role</th>
                             <th class="text-center">Opsi</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        @foreach ($activity as $act)
                             <tr>
-                                <th scope="row" class="text-center">{{ ++$i }}</th>
-                                <td>{{ $act->nama }}</td>
-                                <td>{{ $act->materi->nama }}</td>
-                                <td>{{ $act->user->fullname }}</td>
-                                <td>{{ $act->tugas->nama }}</td>
+                                <th scope="row" class="text-center"></th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td class="text-center">
-                                    <form action="{{ route('activity.destroy', $act->id) }}" method="POST">
-                                        <a class="btn btn-info" href="{{ route('activity.show', $act->id) }}"><i
+                                    <form action="" method="POST">
+                                        <a class="btn btn-info" href=""><i
                                                 class="bi bi-eye pe-2"></i>Details</a>
-                                        <a class="btn btn-primary" href="{{ route('activity.edit', $act->id) }}"><i
+                                        <a class="btn btn-primary" href=""><i
                                                 class="bi bi-pencil-square pe-2"></i>Edit</a>
 
                                         @csrf
@@ -56,7 +53,6 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>
