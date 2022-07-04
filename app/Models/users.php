@@ -28,4 +28,9 @@ class users extends Model
     {
         return $this->hasMany(Activity::class, 'id', 'user_id');
     }
+
+    public function murid()
+    {
+        return $this->hasOne(Murid::class, 'id', 'user_id');
+    }
 }

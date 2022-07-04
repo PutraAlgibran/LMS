@@ -29,7 +29,8 @@ Route::get('/dashboard', function () {
 // Route::get('/materiUser', function () {
 //     return view('materidanTugas.materiUser');
 // });
-Route::get('/materiUser', [KelasController::class, 'kelas']);
+Route::get('/materiGuru', [KelasController::class, 'kelas']);
+Route::get('/materiUser', [KelasController::class, 'materiUser']);
 
 Route::get('/detailMateri', function () {
     return view('materidanTugas.detailMateri');
@@ -39,9 +40,9 @@ Route::get('/detailTugas', function () {
     return view('materidanTugas.detailTugas');
 });
 
-Route::get('/materiGuru', function () {
-    return view('materidanTugas.materiGuru');
-});
+// Route::get('/materiGuru', function () {
+//     return view('materidanTugas.materiGuru');
+// });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);

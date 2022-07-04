@@ -32,8 +32,9 @@
     <meta name="description" content="" />
 
     <!-- // evo-calendar.css, followed by [theme-name].css (optional) --><!-- Add the evo-calendar.css for styling -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/>
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/css/evo-calendar.min.css"/> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/evo-calendar.royal-navy.min.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/evo-calendar.min.css') }}"/>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/avatars/logo.png') }}"/>
@@ -148,6 +149,8 @@
             $('#calendar').evoCalendar({
                 theme: 'Royal Navy',
             })
+            $('#calendar').evoCalendar('toggleEventList', false);
+            $('#calendar').evoCalendar('toggleSidebar', false);
         })
     </script>
   </body>

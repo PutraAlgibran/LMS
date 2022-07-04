@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Materi;
 use App\Models\Guru;
 use App\Models\Kelas;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -90,16 +93,40 @@ class KelasController extends Controller
         $data = Kelas::with(['materi']);
         return response()->json($data->paginate(), 200);
     }
-    public function kelas()
+    public function kelas(Request $request)
     {
-
+        // if ($request->session()->get('role') == 'Guru') {
+        //     $guru_id = Guru::where('user_id', $request->session()->get('id'));
+        //     $materi = DB::table('materi_kelas')->where('guru_id', $guru_id)->get();
+        //     dd($materi);
+        // }
         $materi = Materi::get();
         // $kelas = Kelas::find(1)->materi;
         // dd($materi->kelas);
         // foreach ($materi as $key => $m) {
-        //     // foreach ($m->kelas as $k => $kelas) {
-        //     //     echo $kelas->guru[$k]->nama . "<br>";
-        //     // }
+        //     foreach ($materi->mat as $k => $kelas) {
+        //         echo $kelas->guru[$k]->nama . "<br>";
+        //     }
+        //     echo $m->kelas[$key]->guru[0]->nama;
+        // }
+        // die;
+        return view('materidanTugas.materiGuru', compact('materi'));
+    }
+
+    public function materiUser(Request $request)
+    {
+        // if ($request->session()->get('role') == 'Guru') {
+        //     $guru_id = Guru::where('user_id', $request->session()->get('id'));
+        //     $materi = DB::table('materi_kelas')->where('guru_id', $guru_id)->get();
+        //     dd($materi);
+        // }
+        $materi = Materi::get();
+        // $kelas = Kelas::find(1)->materi;
+        // dd($materi->kelas);
+        // foreach ($materi as $key => $m) {
+        //     foreach ($materi->mat as $k => $kelas) {
+        //         echo $kelas->guru[$k]->nama . "<br>";
+        //     }
         //     echo $m->kelas[$key]->guru[0]->nama;
         // }
         // die;

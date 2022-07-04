@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\users;
+use App\Models\Murid;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -25,8 +27,14 @@ class LoginController extends Controller
             $user = users::where('username', $request->username)->first();
             // $request->session()->put('role', $user->role);
             $request->session()->regenerate();
+            $request->session()->put('id', $user->id);
+            $request->session()->put('role', $user->role);
+            if ($user->role == 'Murid') {
+                $request->session()->put('kelas_id', Murid::where('user_id', $user->id)->get()[0]->kelas_id);
+            }
             return redirect()->intended('/home');
         }
+        dd('error');
         return back()->with('loginError', 'Login failed');
     }
 
