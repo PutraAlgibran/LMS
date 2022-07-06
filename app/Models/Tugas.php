@@ -13,6 +13,6 @@ class Tugas extends Model
     // 
 
     public function activity(){
-        return $this->hasMany(Activity::class, 'id', 'tugas_id');
+        return $this->belongsToMany(Activity::class, 'id', 'tugas_id');
     }
 }
