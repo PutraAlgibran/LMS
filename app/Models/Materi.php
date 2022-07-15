@@ -25,4 +25,12 @@ class Materi extends Model
     {
         return $this->belongsToMany(Kelas::class, 'materi_kelas');
     }
+    public function tugas()
+    {
+        return $this->hasMany(Tugas::class);
+    }
+    public function pertemuan()
+    {
+        return $this->hasMany(Pertemuan::class);
+    }
 }

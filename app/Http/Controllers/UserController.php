@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseFormatter;
-use DB;
 use PDF;
+use Illuminate\Support\Facades\DB;
 use App\Models\users;
 use App\Exports\UserExport;
 use Maatwebsite\Excel\Facades\Excel;

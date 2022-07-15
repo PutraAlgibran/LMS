@@ -342,7 +342,8 @@ tr.calendar-body .calendar-day .day[disabled] {
     cursor: pointer;
     -webkit-box-shadow: 5px 0 18px -3px #8773c1;
     box-shadow: 5px 0 18px -3px #8773c1;
-    z-index: 1
+    z-index: 1;
+    display: none;
 }
 
 .event-list::after {

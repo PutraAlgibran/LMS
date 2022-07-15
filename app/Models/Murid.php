@@ -9,6 +9,7 @@ class Murid extends Model
 {
     use HasFactory;
     protected $table = 'murid';
+    protected $guarded = [];
 
     public function user()
     {
@@ -17,6 +18,6 @@ class Murid extends Model
 
     public function kelas()
     {
-        return $this->hasOne(Kelas::class, 'kelas_id', 'id');
+        return $this->belongsTo(Kelas::class, 'kelas_id', 'id');
     }
 }

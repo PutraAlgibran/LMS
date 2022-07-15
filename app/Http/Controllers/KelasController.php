@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Materi;
 use App\Models\Guru;
 use App\Models\Kelas;
+use App\Models\users;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
@@ -40,7 +41,11 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'kelas' => 'required',
+            'file' => 'file|mimes:pdf,doc,jpeg,png,jpg,gif,svg|max:20000',
+        ]);
     }
 
     /**
@@ -88,11 +93,6 @@ class KelasController extends Controller
         //
     }
 
-    public function all()
-    {
-        $data = Kelas::with(['materi']);
-        return response()->json($data->paginate(), 200);
-    }
     public function kelas(Request $request)
     {
         // if ($request->session()->get('role') == 'Guru') {
@@ -100,7 +100,8 @@ class KelasController extends Controller
         //     $materi = DB::table('materi_kelas')->where('guru_id', $guru_id)->get();
         //     dd($materi);
         // }
-        $materi = Materi::get();
+        $materi = Materi::all();
+        $kelas = Kelas::all();
         // $kelas = Kelas::find(1)->materi;
         // dd($materi->kelas);
         // foreach ($materi as $key => $m) {
@@ -110,7 +111,7 @@ class KelasController extends Controller
         //     echo $m->kelas[$key]->guru[0]->nama;
         // }
         // die;
-        return view('materidanTugas.materiGuru', compact('materi'));
+        return view('materidanTugas.materiGuru', compact('materi', 'kelas'));
     }
 
     public function materiUser(Request $request)

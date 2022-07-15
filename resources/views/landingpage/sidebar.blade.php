@@ -45,41 +45,47 @@
                     <div data-i18n="Analytics">Data User</div>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ url('/DataGuru') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Analytics">Data Guru</div>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="{{ url('/DataMurid') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Analytics">Data Murid</div>
+                </a>
+            </li>
         @endif
         @if (Auth::user()->role !== 'Murid')
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Guru</span>
             </li>
             <li class="menu-item">
-                <a href="{{ url('/activity') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-layout"></i>
-                    <div data-i18n="Analytics">Activity</div>
-                </a>
-            </li>
-            <li class="menu-item">
                 <a href="{{ url('/materiGuru') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-layout"></i>
-                    <div data-i18n="Analytics">Materi</div>
+                    <div data-i18n="Analytics">Mata Pelajaran</div>
                 </a>
             </li>
         @endif
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Murid</span>
+        </li>
         @if (Auth::user()->role !== 'Guru')
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Murid</span>
-            </li>
             <li class="menu-item">
                 <a href="{{ url('/materiUser') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-layout"></i>
                     <div data-i18n="Analytics">Materi</div>
                 </a>
             </li>
-            <li class="menu-item">
-                <a href="#" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-layout"></i>
-                    <div data-i18n="Analytics">Absensi</div>
-                </a>
-            </li>
         @endif
+        <li class="menu-item">
+            <a href="{{ url('/absensi' . '/' . Auth::user()->username) }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div data-i18n="Analytics">Absensi</div>
+            </a>
+        </li>
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Authentications</span>
         </li>

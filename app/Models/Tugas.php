@@ -11,8 +11,17 @@ class Tugas extends Model
 
     protected $table = "tugas";
     // 
-
-    public function activity(){
-        return $this->hasMany(Activity::class, 'id', 'tugas_id');
+    protected $guarded = [];
+    public function kelas()
+    {
+        return $this->hasMany(Kelas::class);
+    }
+    public function materi()
+    {
+        return $this->belongsTo(Materi::class);
+    }
+    public function pertemuan()
+    {
+        return $this->belongsTo(Materi::class);
     }
 }

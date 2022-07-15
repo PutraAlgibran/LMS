@@ -33,8 +33,14 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                     <div class="form-group">
-                        <label for="role" class="form-label"><strong>Role: </strong></label>
-                        <input type="text" name="role" class="form-control" value="{{ $user->role }}">
+                        <label for="role" class="form-label">Role: </label>
+                        <select class="form-select" id="role" aria-label="Default select example" name="role">
+                            <option>Select the role</option>
+                            <option value="Admin" {{ $user->role == 'Admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="Staff" {{ $user->role == 'Staff' ? 'selected' : '' }}>Staff</option>
+                            <option value="Guru" {{ $user->role == 'Guru' ? 'selected' : '' }}>Guru</option>
+                            <option value="Murid" {{ $user->role == 'Murid' ? 'selected' : '' }}>Murid</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
