@@ -11,16 +11,12 @@
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div align="center">
-                        <h3 class="display-3">Daftar User</h3>
+                        <h3 class="display-3">Daftar Guru</h3>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6 ps-4">
-                    <a href="{{ url('generate-pdf') }}" type="button" class="btn btn-danger btn-icon-text mr-3">
-                        Tes PDF
-                        <i class="typcn typcn-folder btn-icon-append"></i>
-                    </a>
                     <a href="{{ url('users-pdf') }}" type="button" class="btn btn-success btn-icon-text mr-3">
                         Unduh Users (PDF)
                         <i class="typcn typcn-folder btn-icon-append"></i>
@@ -44,7 +40,7 @@
                             <th class="text-center">No</th>
                             <th>Fullname</th>
                             <th>Username</th>
-                            <th>Role</th>
+                            <th class="text-center">Telpon</th>
                             <th class="text-center">Opsi</th>
                         </tr>
                     </thead>

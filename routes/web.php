@@ -44,18 +44,22 @@ Route::get('/tambahGuru', [GuruController::class, 'create']);
 Route::post('/tambahGuru', [GuruController::class, 'store']);
 
 //Murid
-Route::get('/DataMurid', [MuridController::class, 'index']);
+Route::get('/DataMurid', [MuridController::class, 'index'])->name('murid.index');
+// Create Data Murid
 Route::get('/tambahMurid', [MuridController::class, 'create']);
 Route::post('/tambahMurid', [MuridController::class, 'store']);
+// Edit Data Murid
+Route::get('/editMurid/{id}', [MuridController::class, 'edit']);
+Route::put('/editMurid/{id}', [MuridController::class, 'update']);
+// Delete Data Murid
+Route::delete('/deleteMurid/{id}', [MuridController::class, 'destroy']);
 // Route::get('/materiUser', function () {
 //     return view('materidanTugas.materiUser');
 // });
 Route::get('/materiGuru', [KelasController::class, 'kelas']);
 Route::get('/materiUser', [KelasController::class, 'materiUser']);
 
-
 // Route::post("/tambahGuru", [MateriController::class, 'storeGuru']);
-
 Route::get("/detailMateri/{id}", [MateriController::class, 'show']);
 Route::get("/tambahMateri", [MateriController::class, 'store']);
 Route::post("/tambahMataPelajaran", [MateriController::class, 'storeMapel']);
@@ -63,7 +67,6 @@ Route::post("/tambahMataPelajaran", [MateriController::class, 'storeMapel']);
 Route::get("/detailTugas/{materi_id}/{pertemuan_id}
 ", [TugasController::class, 'show']);
 Route::post("/tambahTugas", [TugasController::class, 'store']);
-
 
 Route::post("/uploadTugas/{id}", [TugasController::class, 'upload'])->name('uploadTugas');
 

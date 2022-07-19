@@ -11,16 +11,12 @@
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div align="center">
-                        <h3 class="display-3">Daftar User</h3>
+                        <h3 class="display-3">Daftar Murid</h3>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6 ps-4">
-                    <a href="{{ url('generate-pdf') }}" type="button" class="btn btn-danger btn-icon-text mr-3">
-                        Tes PDF
-                        <i class="typcn typcn-folder btn-icon-append"></i>
-                    </a>
                     <a href="{{ url('users-pdf') }}" type="button" class="btn btn-success btn-icon-text mr-3">
                         Unduh Users (PDF)
                         <i class="typcn typcn-folder btn-icon-append"></i>
@@ -58,9 +54,9 @@
                                 <td>{{ $m->kelas->nama }}</td>
                                 {{-- <td>{{ $m->kelas[0] }}</td> --}}
                                 <td class="text-center">
-                                    <form action="" method="POST">
+                                    <form action="{{ url('/deleteMurid/' . $m->id) }}" method="POST">
                                         <a class="btn btn-info" href=""><i class="bi bi-eye pe-2"></i>Details</a>
-                                        <a class="btn btn-primary" href=""><i
+                                        <a class="btn btn-primary" href="{{ url('/editMurid/' . $m->id) }}"><i
                                                 class="bi bi-pencil-square pe-2"></i>Edit</a>
 
                                         @csrf

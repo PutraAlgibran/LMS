@@ -54,7 +54,7 @@ class MuridController extends Controller
         try {
             Murid::create($validatedData);
 
-            return redirect()->back()
+            return redirect()->route('murid.index')
                 ->with('success', 'Murid created successfully!');
         } catch (\Exception $e) {
             return redirect()->back()
@@ -81,7 +81,9 @@ class MuridController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kelas = Kelas::all();
+        $murid = Murid::find($id);
+        return view('murid.edit', compact('murid', 'kelas'));
     }
 
     /**
@@ -91,9 +93,21 @@ class MuridController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Murid $murid, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'kelas_id' => 'required',
+        ]);
+
+        try {
+            $murid->where('id', $id)->update($validatedData);
+            return redirect()->route('murid.index')
+                ->with('success', 'Murid updated successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error during the creation!');
+        }
     }
 
     /**
@@ -102,8 +116,11 @@ class MuridController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Murid $murid, $id)
     {
-        //
+        $murid->where('id', $id)->delete($id);
+
+        return redirect()->back()
+            ->with('success', 'Users deleted successfully');
     }
 }

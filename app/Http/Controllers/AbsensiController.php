@@ -42,8 +42,15 @@ class AbsensiController extends Controller
     {
         $isAbsen = null;
         if (Auth::user()->role !== 'Murid') {
-            $absensi = Absensi::where('kelas_id', 'LIKE', $request->post('kelas_id'))
-                ->whereDate('created_at', 'LIKE', $request->post('tanggal'))->get();
+            if ($request->post('kelas_id') == null) {
+                $absensi = Absensi::whereDate('created_at', 'LIKE', $request->post('tanggal'))->get();
+            } else if ($request->post('tanggal') == null) {
+                $absensi = Absensi::where('kelas_id', 'LIKE', $request->post('kelas_id'))->get();
+            } else {
+                $absensi = Absensi::where('kelas_id', 'LIKE', $request->post('kelas_id'))
+                    ->whereDate('created_at', 'LIKE', $request->post('tanggal'))->get();
+            }
+
             if (count($absensi) == 0) {
                 $absensi = Absensi::all();
             }
