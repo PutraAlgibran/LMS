@@ -90,7 +90,6 @@
                 <a href="{{ url('home') }}" class="btn btn-success">Batal</a>
             </div>
         </div>
-        </div>
 
     </form>
 @endsection

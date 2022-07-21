@@ -78,9 +78,11 @@ class GuruController extends Controller
      * @param  \App\Models\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function edit(Guru $guru)
+    public function edit(Guru $guru, $id)
     {
-        //
+        $kelas = Kelas::all();
+        $murid = Guru::find($id);
+        return view('guru.edit', compact('guru', 'kelas'));
     }
 
     /**

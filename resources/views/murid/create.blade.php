@@ -9,7 +9,7 @@
             </div>
             <div class="col-12">
                 <div style="float: right">
-                    <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+                    <a class="btn btn-primary" href="{{ route('murid.index') }}"> Back</a>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
         @csrf
         <div class="container-fluid">
             <div class="row mx-1">
-                <div class="col-xs-12 col-sm-12 col-md-12 my-1">
+                <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <label for="fullname" class="form-label"><strong>Nama Lengkap: </strong></label>
                         <input type="text" name="nama" class="form-control" placeholder="Leonardo De Caprio">
