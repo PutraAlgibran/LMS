@@ -82,7 +82,7 @@
                                 <div class="card-body">    
                                     <div class="card-title d-flex align-items-start justify-content-between">
                                         <div>
-                                            <h5 class="card-title text-primary">Mata Pelajaran</h5>
+                                            <h5 class="card-title text-primary">Kelas</h5>
                                         </div>
                                         <div>
                                         <a href="" type="button" class="btn btn-primary btn-icon-text mr-3">Detail</a>
