@@ -95,7 +95,7 @@
                             </div>
                             <div class="mt-3">
                                 <div class="row g-2">
-                                    <div class="col-2 mt-4">
+                                    <div class="col-lg-2 col-md-3 col-sm-4 mt-4">
                                         <a class="btn btn-primary d-grid"
                                             href="{{ url("detailTugas/$p->materi_id/$p->id") }}">Lihat Tugas</a>
                                     </div>

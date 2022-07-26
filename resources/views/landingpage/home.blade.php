@@ -4,30 +4,6 @@
         <div class="row">
             <div class="col-lg-8 mb-2 order-0">
                 <div class="row">
-                    <div class="col-12 mb-4">
-                        <div class="card">
-                            <div class="d-flex align-items-center row">
-                                <div class="col-12">
-                                    <div class="card-body">
-                                        <h4 class="card-title text-primary">Hai
-                                            {{ Auth::user()->fullname }}</h4>
-                                        <h5 class="mb-4">
-                                            Absensi Kamu Saat Ini Adalah
-                                            <span
-                                                style="color:#696cff; font-size:30px; padding: 0 5px;">{{ $calculate }}%</span>
-                                            dari minimal <span
-                                                style="color:#696cff; font-size:30px; padding: 0 5px;">80%</span>
-                                        </h5>
-                                        <a href="{{ url('/absensi' . '/' . Auth::user()->username) }}"
-                                            class="btn btn-sm btn-outline-primary" style="font-size: 20px">Lihat
-                                            Absensi</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-12">
                         <div class="alert alert-primary">
                             <div class="card">
@@ -51,6 +27,84 @@
                         </div>
                     </div>
                 </div>
+                @if (Auth::user()->role == 'Guru')
+                    <div class="row">
+                        <div class="col-lg-12 mb-4 order-0">
+                            <div class="row">
+                                <div class="col-12 mb-4">
+                                    <div class="card">
+                                        <div class="row">
+                                            <div class="card-body">
+                                                <div class="card-title d-flex align-items-start justify-content-between">
+                                                    <div>
+                                                        <h5 class="card-title text-primary">Mata Pelajaran Yang Diajar</h5>
+                                                    </div>
+                                                    <div>
+                                                        <a href="{{ url('/materiGuru') }}" type="button"
+                                                            class="btn btn-primary btn-icon-text mr-3">Detail</a>
+                                                    </div>
+                                                </div>
+                                                <div class="container text-center my-3">
+                                                    <div class="row mx-auto my-auto justify-content-center">
+                                                        @foreach ($materi as $key => $m)
+                                                            @if ($m->guru[0]->user_id == Auth::id())
+                                                                <div class="col-md-4 pt-3">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h6
+                                                                                class="card-subtitle bg-dark text-white py-1">
+                                                                                {{ $m->nama }}
+                                                                            </h6>
+                                                                            <h6 class="card-subtitle pt-3">
+                                                                                {{ $m->kelas[0]->nama }}
+                                                                            </h6>
+                                                                        </div>
+                                                                        <div class="card-img">
+                                                                            <img src="{{ asset('assets/img/avatars/book.jpg') }}"
+                                                                                class="img-fluid">
+                                                                        </div>
+                                                                        <div class="card-footer">
+                                                                            {{ $m->guru[0]->nama }}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @elseif(Auth::user()->role == 'Murid')
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <div class="card">
+                                <div class="d-flex align-items-center row">
+                                    <div class="col-12">
+                                        <div class="card-body">
+                                            <h4 class="card-title text-primary">Hai
+                                                {{ Auth::user()->fullname }}</h4>
+                                            <h5 class="mb-4">
+                                                Absensi Kamu Saat Ini Adalah
+                                                <span
+                                                    style="color:#696cff; font-size:30px; padding: 0 5px;">{{ $calculate }}%</span>
+                                                dari minimal <span
+                                                    style="color:#696cff; font-size:30px; padding: 0 5px;">80%</span>
+                                            </h5>
+                                            <a href="{{ url('/absensi' . '/' . Auth::user()->username) }}"
+                                                class="btn btn-sm btn-outline-primary" style="font-size: 20px">Lihat
+                                                Absensi</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
 
             <!--/ Calendar -->

@@ -40,7 +40,7 @@
                             <th class="text-center">No</th>
                             <th>Fullname</th>
                             <th>Username</th>
-                            <th class="text-center">Telpon</th>
+                            <th>Telpon</th>
                             <th class="text-center">Opsi</th>
                         </tr>
                     </thead>
@@ -53,15 +53,14 @@
                                 <td>{{ $g->telpon }}</td>
                                 <td class="text-center">
                                     <form action="" method="POST">
-                                        <a class="btn btn-info" href=""><i class="bi bi-eye pe-2"></i>Details</a>
                                         <a class="btn btn-primary" href="{{ url('/editGuru/' . $g->id) }}"><i
-                                                class="bi bi-pencil-square pe-2"></i>Edit</a>
+                                                class="bi bi-pencil-square"></i></a>
 
                                         @csrf
                                         @method('DELETE')
 
                                         <a href="/deleteGuru/{{ $g->id }}" class="btn btn-danger delete-confirm"
-                                            role="button"><i class="bi bi-trash3 pe-2"></i>Delete</a>
+                                            role="button"><i class="bi bi-trash3"></i></a>
                                         {{-- <button type="submit" class="btn btn-danger delete-confirm"><i
                                                 class="bi bi-trash3 pe-2"></i>Delete</button> --}}
                                     </form>

@@ -57,12 +57,12 @@
                                     {{-- <form action="" method="POST"> --}}
 
                                     <a class="btn btn-primary" href="{{ url('/editMurid/' . $m->id) }}"><i
-                                            class="bi bi-pencil-square pe-2"></i>Edit</a>
+                                            class="bi bi-pencil-square"></i></a>
 
                                     @csrf
                                     @method('DELETE')
                                     <a href="/deleteMurid/{{ $m->id }}" class="btn btn-danger delete-confirm"
-                                        role="button"><i class="bi bi-trash3 pe-2"></i>Delete</a>
+                                        role="button"><i class="bi bi-trash3"></i></a>
                                     {{-- <button type="submit" class="btn btn-danger"><i
                                             class="bi bi-trash3 pe-2"></i>Delete</button> --}}
                                 </td>
