@@ -57,6 +57,12 @@
                     <div data-i18n="Analytics">Data Murid</div>
                 </a>
             </li>
+            <li class="menu-item">
+                <a href="{{ url('/DataKelas') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-layout"></i>
+                    <div data-i18n="Analytics">Data Kelas</div>
+                </a>
+            </li>
         @endif
         @if (Auth::user()->role !== 'Murid')
             <li class="menu-header small text-uppercase">
@@ -88,12 +94,6 @@
         </li>
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Authentications</span>
-        </li>
-        <li class="menu-item">
-            <a href="https://wa.me/+6281315113236" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-layout"></i>
-                <div data-i18n="Analytics">Forgot Password</div>
-            </a>
         </li>
         <li class="menu-item">
             <a class="menu-link" href="{{ route('logout') }}"

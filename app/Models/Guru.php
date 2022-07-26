@@ -15,7 +15,6 @@ class Guru extends Model
     {
         return $this->belongsTo(users::class, 'user_id', 'id');
     }
-
     public function materi()
     {
         return $this->belongsToMany(Materi::class);

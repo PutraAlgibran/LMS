@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseFormatter;
-use PDF;
-use Illuminate\Support\Facades\DB;
 use App\Models\users;
-use App\Exports\UserExport;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use PDF;
+use App\Exports\UserExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -114,10 +113,12 @@ class UserController extends Controller
             'email' => 'required',
             'telpon' => 'required|numeric',
             'alamat' => 'required',
-            'password' => 'required',
         ]);
 
-        $validatedData['password'] = Hash::make($validatedData['password']);
+        $password = $request->post('password');
+        if ($password !== null) {
+            $validatedData['password'] = Hash::make($password);
+        }
 
         //--------proses update data lama & upload file foto baru--------
         $image = $request->file('foto');
@@ -144,7 +145,7 @@ class UserController extends Controller
         try {
             $user->update($validatedData);
             //return redirect()->back()
-            return redirect()->route('users.index')
+            return redirect()->back()
                 ->with('success', 'Users updated successfully');
         } catch (\Exception $e) {
             return redirect()->back()
@@ -167,19 +168,8 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('users.index')
+        return redirect()->back()
             ->with('success', 'Users deleted successfully');
-    }
-    public function generatePDF()
-    {
-        $data = [
-            'title' => 'Tes Export to PDF Using Barryvdh Ext',
-            'date' => date('m/d/Y')
-        ];
-
-        $pdf = PDF::loadView('users/myPDF', $data);
-
-        return $pdf->download('hasil_exportToPdf.pdf');
     }
 
     public function usersPDF()
@@ -195,31 +185,5 @@ class UserController extends Controller
     public function usersExcel()
     {
         return Excel::download(new UserExport, 'user.xlsx');
-    }
-
-    public function all(Request $request)
-    {
-        $id = $request->input('id');
-        if ($id) {
-            $id_user = users::find($id);
-            if ($id_user) {
-                return ResponseFormatter::success(
-                    $id_user,
-                    'Data User Berhasil ditampilkan'
-                );
-            } else {
-                return ResponseFormatter::error(
-                    null,
-                    'Data User Gagal ditampilkan',
-                    404
-                );
-            }
-        }
-
-        $user = users::all();
-        return ResponseFormatter::success(
-            $user,
-            'Data User Berhasil Ditampilkan'
-        );
     }
 }

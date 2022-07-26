@@ -6,6 +6,9 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\users;
 use Illuminate\Http\Request;
+use PDF;
+use App\Exports\GuruExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GuruController extends Controller
 {
@@ -42,11 +45,10 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'nama' => 'required',
             'email' => 'required',
-            'telpon' => 'required',
+            'telpon' => 'required|numeric',
             'user_id' => 'required',
         ]);
 
@@ -80,9 +82,10 @@ class GuruController extends Controller
      */
     public function edit(Guru $guru, $id)
     {
-        $kelas = Kelas::all();
-        $murid = Guru::find($id);
-        return view('guru.edit', compact('guru', 'kelas'));
+        $guru = Guru::find($id);
+        $users = users::where('role', 'Guru')->get();
+        // dd($users);
+        return view('guru.edit', compact('guru', 'users'));
     }
 
     /**
@@ -92,9 +95,24 @@ class GuruController extends Controller
      * @param  \App\Models\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Guru $guru)
+    public function update(Request $request, Guru $guru, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'email' => 'required',
+            'telpon' => 'numeric',
+            'user_id' => 'required',
+        ]);
+
+        try {
+            $guru->where('id', $id)->update($validatedData);
+
+            return redirect()->back()
+                ->with('success', 'Guru created successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error during the creation!');
+        }
     }
 
     /**
@@ -103,14 +121,26 @@ class GuruController extends Controller
      * @param  \App\Models\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Guru $guru)
+    public function destroy(Guru $guru, $id)
     {
-        //
+        $guru->where('id', $id)->delete($id);
+
+        return redirect()->back()
+            ->with('success', 'Users deleted successfully');
     }
 
-    public function all()
+    public function guruPDF()
     {
-        $data = Guru::with(['user', 'materi']);
-        return response()->json($data->paginate(), 200);
+        $data = Guru::all();
+        //dd($data);
+
+        $pdf = PDF::loadView('guru/guruPDF', ['data' => $data]);
+
+        return $pdf->download(date('d/m/y') . '_data_guru.pdf');
+    }
+
+    public function guruExcel()
+    {
+        return Excel::download(new GuruExport, 'guru.xlsx');
     }
 }

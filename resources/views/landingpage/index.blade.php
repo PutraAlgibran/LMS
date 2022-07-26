@@ -63,7 +63,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 
     <!-- Page CSS -->
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/kelas.css') }}">
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
@@ -133,6 +133,7 @@
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+    @stack('customscripts')
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -143,6 +144,7 @@
 
     <!-- Add the evo-calendar.js for.. obviously, functionality! -->
     <script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         // initialize your calendar, once the page's DOM is ready
         $(document).ready(function() {
@@ -151,6 +153,37 @@
             })
             $('#calendar').evoCalendar('toggleEventList', false);
             $('#calendar').evoCalendar('toggleSidebar', false);
+        })
+        $('.delete-confirm').on('click', function(event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            swal({
+                title: 'Anda yakin hapus data?',
+                text: 'Data yang dihapus akan terhapus permanent!',
+                icon: 'warning',
+                buttons: ["Batal", "Hapus!"],
+            }).then(function(value) {
+                if (value) {
+                    window.location.href = url;
+                }
+            });
+        });
+
+        // kelas carousel 
+        let items = document.querySelectorAll('.carousel .carousel-item')
+
+        items.forEach((el) => {
+            const minPerSlide = 3
+            let next = el.nextElementSibling
+            for (var i = 1; i < minPerSlide; i++) {
+                if (!next) {
+                    // wrap carousel by using first child
+                    next = items[0]
+                }
+                let cloneChild = next.cloneNode(true)
+                el.appendChild(cloneChild.children[0])
+                next = next.nextElementSibling
+            }
         })
     </script>
   </body>

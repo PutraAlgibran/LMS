@@ -4,12 +4,12 @@
         <div class="row">
             <div class="col-12 text-center mt-4">
                 <div>
-                    <h2>Tambah Data User</h2>
+                    <h2>Tambah Data Guru</h2>
                 </div>
             </div>
             <div class="col-12">
                 <div style="float: right">
-                    <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
+                    <a class="btn btn-primary" href="{{ url('/DataGuru') }}"> Back</a>
                 </div>
             </div>
         </div>
@@ -44,7 +44,8 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                     <div class="form-group">
                         <label for="telpon" class="form-label"><strong>Nomor Telpon: </strong></label>
-                        <input type="number" name="telpon" class="form-control" placeholder="0858xxxx">
+                        <input type="text" maxlength="12" name="telpon" id="telpon" class="form-control"
+                            placeholder="087879192911">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">

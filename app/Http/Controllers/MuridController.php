@@ -6,6 +6,9 @@ use App\Models\Murid;
 use App\Models\Kelas;
 use App\Models\users;
 use Illuminate\Http\Request;
+use PDF;
+use App\Exports\MuridExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MuridController extends Controller
 {
@@ -17,10 +20,10 @@ class MuridController extends Controller
     public function index()
     {
         $murid = Murid::latest()->paginate(100);
+
         return view('murid.index', [
             'murid' => $murid,
             'kelas' => Kelas::all(),
-
         ]);
     }
 
@@ -102,6 +105,7 @@ class MuridController extends Controller
 
         try {
             $murid->where('id', $id)->update($validatedData);
+
             return redirect()->route('murid.index')
                 ->with('success', 'Murid updated successfully!');
         } catch (\Exception $e) {
@@ -122,5 +126,19 @@ class MuridController extends Controller
 
         return redirect()->back()
             ->with('success', 'Users deleted successfully');
+    }
+
+    public function muridPDF()
+    {
+        $data = Murid::with(['user', 'kelas'])->get();
+
+        $pdf = PDF::loadView('murid/muridPDF', ['data' => $data]);
+
+        return $pdf->download(date('d/m/y') . '_data_murid.pdf');
+    }
+
+    public function muridExcel()
+    {
+        return Excel::download(new MuridExport, 'murid.xlsx');
     }
 }

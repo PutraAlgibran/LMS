@@ -87,16 +87,16 @@
                     </div>
                 </form>
                 <table class="table">
-                    <thead class="table-dark">
+                    <thead class="table-dark text-center">
                         <tr>
-                            <th class="text-center">No</th>
+                            <th>No</th>
                             <th>Nama</th>
                             <th>Kelas</th>
                             <th>Status</th>
                             <th>Keterangan</th>
                             <th>Created_at</th>
                             @if (Auth::user()->role !== 'Murid')
-                                <th class="text-center">Opsi</th>
+                                <th>Opsi</th>
                             @endif
                         </tr>
                     </thead>
@@ -106,8 +106,8 @@
                             <tr>
                                 <th scope="row" class="text-center">{{ $i++ }}</th>
                                 <td>{{ $absen->user->fullname }}</td>
-                                <td>{{ $absen->kelas->nama }}</td>
-                                <td>{{ $absen->status }}</td>
+                                <td class="text-center">{{ $absen->kelas->nama }}</td>
+                                <td class="text-center">{{ $absen->status }}</td>
                                 <td>{{ $absen->keterangan }}</td>
                                 <td class="text-center">{{ $absen->created_at }}</td>
                                 @if (Auth::user()->role !== 'Murid')
@@ -118,7 +118,7 @@
 
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"><i
+                                            <button type="submit" class="btn btn-danger delete-confirm"><i
                                                     class="bi bi-trash3"></i>Delete</button>
 
                                             {{-- <a href="/users-delete/{{ $user->id }}"

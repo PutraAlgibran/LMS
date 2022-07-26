@@ -93,7 +93,7 @@
         </div>
         @endif
     </div>
-
+    {{-- Tugas Murid --}}
     @if ($tugas !== null)
         <div class="col-md mb-4 mb-md-0">
             <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
@@ -120,23 +120,81 @@
                                     <input type="hidden" name="materi_id" value="{{ $materi->id }}">
                                     <div class="row g-2">
                                         <div class="col-6 mb-0">
+                                            <h5>Tugas Hanya Dapat Dikirim 1x</h5>
                                             <label for="dobWithTitle" class="form-label">Upload File Tugas</label>
                                             @if ($tugasUpload !== null and $tugasUpload !== '')
                                                 <a href="http://localhost:8000/assets/materi/{{ $materi->nama }}/{{ $tugas->nama }}/TugasUpload/{{ $tugasUpload->file }}"
-                                                    onclick="return confirm('Yakin Download Tugas?');">Download Tugasmu</a>
+                                                    onclick="return confirm('Yakin Download Tugas?');">Download
+                                                    Tugasmu</a>
                                             @elseif($tugasUpload !== '')
-                                                <input type="file" name="tugasUpload" class="form-control">
+                                                @if (Date('Y-m-d') <= $tugas->jam_berakhir)
+                                                    <input type="file" name="tugasUpload" class="form-control">
+                                                @else
+                                                    <br>
+                                                    <h4>Pengumpulan Tugas Telah Berakhir, Silahkan Hubungi Guru Yang
+                                                        Bersangkutan!</h4>
+                                                @endif
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="row g-2">
-                                        <div class="col-3 mt-4">
-                                            <input type="submit" class="btn btn-primary" value="Kirim">
-                                        </div>
-                                    </div>
+                                    @if ($tugasUpload == null and $tugasUpload == '')
+                                        @if (Date('Y-m-d') <= $tugas->jam_berakhir)
+                                            <div class="row g-2">
+                                                <div class="col-3 mt-4">
+                                                    <input type="submit" class="btn btn-primary" value="Kirim">
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="row g-2">
+                                                <div class="col-3 mt-3">
+                                                    <input type="submit" class="btn btn-primary disabled"
+                                                        value="Kirim">
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endif
                                 </form>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+    @if (Auth::user()->role == 'Guru' and $tugas !== null)
+        {{-- Data Tugas Murid --}}
+        <div class="col-md mb-4 mb-md-0">
+            <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
+                <div class="accordion-item card">
+                    <h4 class="text-center">Data Tugas Murid</h4>
+                    <?php $i = 1; ?>
+                    <div class="table-responsive text-nowrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>File</th>
+                                    <th>Waktu Upload</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @foreach ($daftarTugas as $t)
+                                    <tr class="table-success">
+                                        <td>
+                                            <i class="fab fa-bootstrap fa-lg text-primary me-3"></i>
+                                            <strong>{{ $i++ }}</strong>
+                                        </td>
+                                        <td>{{ $t->user[0]->fullname }}</td>
+                                        <td><a href="http://localhost:8000/assets/materi/{{ $materi->nama }}/{{ $tugas->nama }}/TugasUpload/{{ $t->file }}"
+                                                onclick="return confirm('Yakin Download Tugas?');">Download
+                                                Tugas</a>
+                                        </td>
+                                        <td>{{ $t->created_at }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

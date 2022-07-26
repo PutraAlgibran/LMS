@@ -1,6 +1,13 @@
 @extends('landingpage.auth')
 @section('content')
     <!-- Content -->
+    @if (count($errors) > 0)
+        @foreach ($errors->all() as $message)
+            <div class="alert alert-danger display-hide">
+                <span>{{ $message }}</span>
+            </div>
+        @endforeach
+    @endif
     <div class="container-xxl">
         <div class="row justify-content-center my-5">
             <div class="col-lg-4">
@@ -52,12 +59,20 @@
                                         <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                                     </div>
                                 </form>
+                                <div class="mb-3 text-center">
+                                    <p>forgot your password?
+                                        <a
+                                            href="https://wa.me/+6281315113236?text=Halo%20Admin%2C%20saya%20lupa%20password%20akun%20lms%20saya.">click
+                                            here</a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     {{-- End Content --}}
 @endsection

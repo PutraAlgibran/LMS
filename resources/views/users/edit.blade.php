@@ -52,15 +52,15 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                     <div class="form-group">
                         <label for="email" class="form-label"><strong>Email: </strong></label>
-                        <input type="email" name="email" class="form-control" id="email"
-                            value="{{ $user->email }}" aria-describedby="emailHelp">
+                        <input type="email" name="email" class="form-control" id="email" value="{{ $user->email }}"
+                            aria-describedby="emailHelp">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                     <div class="form-group">
                         <label for="telpon" class="form-label"><strong>Telpon: </strong></label>
-                        <input type="number" maxlength="12" name="telpon" class="form-control"
-                            value="{{ $user->telpon }}">
+                        <input type="text" maxlength="12" name="telpon" id="telpon" value="{{ $user->telpon }}"
+                            class="form-control" placeholder="087879192911">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
@@ -72,7 +72,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">
                     <div class="form-group">
                         <label for="password" class="form-label"><strong>Password: </strong></label>
-                        <input type="password" name="password" class="form-control" value="{{ $user->password }}">
+                        <input type="password" name="password" class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 my-1">

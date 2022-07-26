@@ -10,9 +10,10 @@
                                 <h5 class="card-title">{{ $m->nama }}</h5>
                                 <h6 class="card-subtitle text-muted">{{ $m->guru[0]->nama }}</h6>
                             </div>
-                            <img src="{{ asset('assets/img/avatars/7.png') }}" class="img-thumbnail">
+                            <img src="{{ asset('assets/img/avatars/book.jpg') }}" class="img-thumbnail">
                             <div class="card-body">
-                                <a href="{{ url("/detailMateri/$m->id") }}" class="card-link">Materi</a>
+                                <a style="font-size: 20px" href="{{ url("/detailMateri/$m->id") }}" class="card-link">Detail
+                                    Materi</a>
                             </div>
                         </div>
                     </div>

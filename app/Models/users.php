@@ -24,13 +24,18 @@ class users extends Model
         return $this->belongsTo(Guru::class, 'user_id', 'id');
     }
 
-    public function activity()
-    {
-        return $this->hasMany(Activity::class, 'id', 'user_id');
-    }
-
     public function murid()
     {
         return $this->hasOne(Murid::class, 'id', 'user_id');
+    }
+
+    // public function tugas()
+    // {
+    //     return $this->belongsToMany(Tugas::class, 'tugas_upload', 'user_id', 'tugas_id');
+    // }
+
+    public function tugas_upload()
+    {
+        return $this->belongsTo(TugasUpload::class, 'id', 'user_id');
     }
 }

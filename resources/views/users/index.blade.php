@@ -54,15 +54,14 @@
                                 <td class="text-center">
                                     <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                         <a class="btn btn-info" href="{{ route('users.show', $user->id) }}"><i
-                                                class="bi bi-eye pe-2"></i>Details</a>
+                                                class="bi bi-eye "></i></a>
                                         <a class="btn btn-primary" href="{{ route('users.edit', $user->id) }}"><i
-                                                class="bi bi-pencil-square pe-2"></i>Edit</a>
+                                                class="bi bi-pencil-square "></i></a>
 
                                         @csrf
                                         @method('DELETE')
 
-                                        <button type="submit" class="btn btn-danger"><i
-                                                class="bi bi-trash3 pe-2"></i>Delete</button>
+                                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash3 "></i></button>
 
                                         {{-- <a href="/users-delete/{{ $user->id }}"
                                             class="btn btn-danger btn-sm delete-confirm" role="button"> Delete <i

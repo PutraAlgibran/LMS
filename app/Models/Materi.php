@@ -16,11 +16,6 @@ class Materi extends Model
     {
         return $this->belongsToMany(Guru::class, 'materi_kelas');
     }
-
-    public function activity(){
-        return $this->belongsToMany(Activity::class, 'id', 'tugas_id');
-    }
-    
     public function kelas()
     {
         return $this->belongsToMany(Kelas::class, 'materi_kelas');

@@ -2,32 +2,28 @@
 <html>
 
 <head>
-    <title>Data Absensi Siswa</title>
+    <title>Data Murid</title>
 </head>
 
 <body>
-    <h1 align="center">Data Absensi</h1>
+    <h1 align="center">Data Murid</h1>
     <table border="1" align="center" cellpadding="10" cellspacing="0">
         <thead>
             <tr bgcolor="grey">
                 <th>No</th>
                 <th>Nama</th>
                 <th>Kelas</th>
-                <th>Status</th>
-                <th>Keterangan</th>
-                <th>Created_at</th>
+                <th>Telpon</th>
             </tr>
         </thead>
         <tbody>
             @php $i = 1; @endphp
-            @foreach ($absensi as $absen)
+            @foreach ($data as $d)
                 <tr>
                     <th scope="row" class="text-center">{{ $i++ }}</th>
-                    <td>{{ $absen->fullname }}</td>
-                    <td>{{ $absen->nama }}</td>
-                    <td>{{ $absen->status }}</td>
-                    <td>{{ $absen->keterangan }}</td>
-                    <td class="text-center">{{ $absen->created_at }}</td>
+                    <td>{{ $d->nama }}</td>
+                    <td>{{ $d->kelas->nama }}</td>
+                    <td>{{ $d->user->telpon }}</td>
                 </tr>
             @endforeach
         </tbody>

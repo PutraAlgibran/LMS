@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Murid;
+use App\Models\users;
 use App\Models\Materi;
 use App\Models\Pertemuan;
 use App\Models\TugasUpload;
@@ -91,6 +92,7 @@ class TugasController extends Controller
         // dd($tugas);
         if (Auth::user()->role != "Guru") {
             $guru_id = '';
+            $daftarTugas = '';
             if ($tugas !== null) {
                 $tugasUpload = TugasUpload::where('tugas_id', $tugas->id)->where('user_id', Auth::user()->id)->first();
             } else {
@@ -99,6 +101,11 @@ class TugasController extends Controller
         } else {
             $guru_id = Guru::where('user_id', Auth::user()->id)->get()[0]->id;
             $tugasUpload = '';
+            if ($tugas !== null) {
+                $daftarTugas = TugasUpload::with('user')->where('tugas_id', $tugas->id)->get();
+            } else {
+                $daftarTugas = '';
+            }
         }
         // dd(Tugas::where('materi_id', $materi_id)->where('pertemuan_id', $pertemuan_id)->first());
         return view('materidanTugas.detailTugas', [
@@ -108,7 +115,8 @@ class TugasController extends Controller
             'guru_id' => $guru_id,
             'materi' => $materi,
             'kelas' => Kelas::all(),
-            'tugasUpload' => $tugasUpload
+            'tugasUpload' => $tugasUpload,
+            'daftarTugas' => $daftarTugas
         ]);
     }
 

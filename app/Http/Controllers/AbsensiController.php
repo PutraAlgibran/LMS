@@ -50,7 +50,6 @@ class AbsensiController extends Controller
                 $absensi = Absensi::where('kelas_id', 'LIKE', $request->post('kelas_id'))
                     ->whereDate('created_at', 'LIKE', $request->post('tanggal'))->get();
             }
-
             if (count($absensi) == 0) {
                 $absensi = Absensi::all();
             }

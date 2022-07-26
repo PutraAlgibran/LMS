@@ -5,9 +5,16 @@
         </h4>
 
         @if (Auth::user()->role !== 'Murid' && Auth::user()->role !== 'Staff')
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
-                Tambah Pertemuan
-            </button>
+            <div class="row d-flex align-content-evenly">
+                <div class="col-10">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                        Tambah Pertemuan
+                    </button>
+                </div>
+                <div class="col-2 text-right ">
+                    <a href="{{ url('/materiGuru') }}" class="btn btn-primary">Back</a>
+                </div>
+            </div>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>

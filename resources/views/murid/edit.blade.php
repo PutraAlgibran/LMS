@@ -37,7 +37,8 @@
                         <select class="form-select" id="kelas_id" aria-label="Default select example" name="kelas_id">
                             <option selected>Select the class</option>
                             @foreach ($kelas as $k)
-                                <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                                <option value="{{ $k->id }}" {{ $k->id == $murid->kelas_id ? 'selected' : '' }}>
+                                    {{ $k->nama }}</option>
                             @endforeach
                         </select>
                     </div>

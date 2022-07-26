@@ -129,7 +129,6 @@ class MateriController extends Controller
      */
     public function show($id)
     {
-
         $materi = Materi::find($id);
         if (Auth::user()->role != "Guru") {
             $guru_id = '';

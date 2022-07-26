@@ -24,6 +24,7 @@ class LoginController extends Controller
             'password' => ['required']
         ]);
         if (Auth::attempt($credentials)) {
+
             $user = users::where('username', $request->username)->first();
             // $request->session()->put('role', $user->role);
             $request->session()->regenerate();
@@ -34,8 +35,8 @@ class LoginController extends Controller
             }
             return redirect()->intended('/home');
         }
-        dd('error');
-        return back()->with('loginError', 'Login failed');
+        return redirect()->back()
+            ->withErrors('Your Input Is Error!');
     }
 
     public function dashboard()

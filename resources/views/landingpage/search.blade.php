@@ -3,28 +3,24 @@
     <!-- Search -->
     <div class="navbar-nav align-items-center">
         <div class="nav-item d-flex align-items-center">
-            <i class="bx bx-search fs-4 lh-0"></i>
-            <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                aria-label="Search..." />
+            <marquee behavior="" direction="">Selamat Datang Di Sekolah Tercinta Kalian Semua Adick-Adick Tercinta,
+                SALAM HANGAT DARI BAPAK KEPSEK! <span style="color: red; font-weight:bolder;">DUA TIGA TUTUP BOTOL, KITA
+                    JALAN-JALAN PAKE
+                    E-TOOL</span>
+            </marquee>
         </div>
     </div>
     <!-- /Search -->
 
     <ul class="navbar-nav flex-row align-items-center ms-auto">
-        <!-- Place this tag where you want the button to render. -->
-        <li class="nav-item lh-1 me-3">
-            <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free"
-                data-icon="octicon-star" data-size="large" data-show-count="true"
-                aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-        </li>
 
         <!-- User -->
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
                     @if (Auth::user() !== null)
-                        <img src="{{ asset('assets/img/avatars/' . Auth::user()->foto) }}" alt
-                            style="max-height: 40px;" class="w-px-40 h-auto rounded-circle" />
+                        <img src="{{ asset('assets/img/avatars/' . Auth::user()->foto) }}" alt style="max-height: 40px;"
+                            class="w-px-40 h-auto rounded-circle" />
                     @else
                         <img src="{{ asset('assets/img/avatars/avatar.png') }}" alt
                             class="w-px-40 h-auto rounded-circle" />
