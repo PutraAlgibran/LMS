@@ -33,6 +33,30 @@
                 </div>
             </div>
             <br>
+            <div class="col-lg-6 col-md-6 col-sm-8 mb-2">
+                <form action="{{ url('/DataMurid/search') }}" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-4 ps-4">
+                            @if (Auth::user()->role !== 'Murid')
+                                <select name="kelas_id" class="form-control">
+                                    <option selected value="">Pilih Kelas</option>
+                                    @foreach ($kelas as $k)
+                                        <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
+                        </div>
+                        <div class="col-6">
+                            <input type="text" name="nama" placeholder="Cari Murid .." value="{{ old('cari') }}"
+                                class="form-control">
+                        </div>
+                        <div class="col-2">
+                            <input type="submit" value="CARI" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead class="table-dark">
@@ -40,7 +64,9 @@
                             <th class="text-center">No</th>
                             <th>Nama Lengkap</th>
                             <th>Kelas</th>
-                            <th class="text-center">Opsi</th>
+                            @if (Auth::user()->role == 'Admin')
+                                <th class="text-center">Opsi</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -53,19 +79,20 @@
                                 <td>{{ $m->nama }}</td>
                                 <td>{{ $m->kelas->nama }}</td>
                                 {{-- <td>{{ $m->kelas[0] }}</td> --}}
-                                <td class="text-center">
-                                    {{-- <form action="" method="POST"> --}}
+                                @if (Auth::user()->role == 'Admin')
+                                    <td class="text-center">
+                                        {{-- <form action="" method="POST"> --}}
+                                        <a class="btn btn-primary" href="{{ url('/editMurid/' . $m->id) }}"><i
+                                                class="bi bi-pencil-square"></i></a>
 
-                                    <a class="btn btn-primary" href="{{ url('/editMurid/' . $m->id) }}"><i
-                                            class="bi bi-pencil-square"></i></a>
-
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="/deleteMurid/{{ $m->id }}" class="btn btn-danger delete-confirm"
-                                        role="button"><i class="bi bi-trash3"></i></a>
-                                    {{-- <button type="submit" class="btn btn-danger"><i
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{ url('/deleteMurid/'. $m->id) }}" class="btn btn-danger delete-confirm"
+                                            role="button"><i class="bi bi-trash3"></i></a>
+                                        {{-- <button type="submit" class="btn btn-danger"><i
                                             class="bi bi-trash3 pe-2"></i>Delete</button> --}}
-                                </td>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>

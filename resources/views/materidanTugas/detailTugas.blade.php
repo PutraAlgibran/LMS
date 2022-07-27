@@ -5,7 +5,7 @@
         </h4>
         <div class="row g-2 d-flex justify-content-between">
             <div class="col-10 mt-4 text-right">
-                <a href="{{ url("/detailMateri/$materi->id") }}" class="btn btn-primary">Back</a>
+                <a href="{{ url("/detailMapel/$materi->id") }}" class="btn btn-primary">Back</a>
             </div>
             @if (Auth::user()->role !== 'Murid' && Auth::user()->role !== 'Staff' && $tugas == null)
                 <div class="col-2 mt-4 text-end">
@@ -110,7 +110,7 @@
                         </div>
                         <div class="accordion-body ">
                             <div class="mt-3">
-                                <a href="http://localhost:8000/assets/materi/{{ $materi->nama }}/{{ $tugas->nama }}/{{ $tugas->file }}"
+                                <a href="https://alif.nurulfikri.com/lms/public/assets/materi/{{ $materi->nama }}/{{ $tugas->nama }}/{{ $tugas->file }}"
                                     onclick="return confirm('Yakin Download Tugas?');">Download Tugas</a>
                             </div>
                             <div class="mt-3">
@@ -123,7 +123,7 @@
                                             <h5>Tugas Hanya Dapat Dikirim 1x</h5>
                                             <label for="dobWithTitle" class="form-label">Upload File Tugas</label>
                                             @if ($tugasUpload !== null and $tugasUpload !== '')
-                                                <a href="http://localhost:8000/assets/materi/{{ $materi->nama }}/{{ $tugas->nama }}/TugasUpload/{{ $tugasUpload->file }}"
+                                                <a href="https://alif.nurulfikri.com/lms/public/assets/materi/{{ $materi->nama }}/{{ $tugas->nama }}/TugasUpload/{{ $tugasUpload->file }}"
                                                     onclick="return confirm('Yakin Download Tugas?');">Download
                                                     Tugasmu</a>
                                             @elseif($tugasUpload !== '')
@@ -154,6 +154,20 @@
                                         @endif
                                     @endif
                                 </form>
+                                            @if(Auth::user()->role == 'Guru')
+                                <div class="row g-2 text-center">
+                                    <div class="col">
+                                        <a class="btn btn-warning mx-2"
+                                            href="{{ url("/editTugas/$tugas->id") }}">Edit</a>
+
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <a href="{{ url('/deleteTugas/' . $tugas->id) }}"
+                                            class="btn btn-danger delete-confirm mx-2" role="button">Delete</a>
+                                    </div>
+                                            @endif;
+                                </div>
                             </div>
                         </div>
                     </div>

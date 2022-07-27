@@ -33,6 +33,20 @@
                 </div>
             </div>
             <br>
+            <div class="col-lg-4 col-md-5 col-sm-6 mb-2">
+                <form action="{{ url('/DataGuru/search') }}" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-7 ps-4">
+                            <input type="text" name="cari" placeholder="Cari Guru .." value="{{ old('cari') }}"
+                                class="form-control">
+                        </div>
+                        <div class="col-2">
+                            <input type="submit" value="CARI" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead class="table-dark">
@@ -45,6 +59,9 @@
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
+                        @php
+                            $i = 0;
+                        @endphp
                         @foreach ($guru as $g)
                             <tr>
                                 <th scope="row" class="text-center">{{ ++$i }}</th>
@@ -59,7 +76,7 @@
                                         @csrf
                                         @method('DELETE')
 
-                                        <a href="/deleteGuru/{{ $g->id }}" class="btn btn-danger delete-confirm"
+                                        <a href="{{ url('/deleteGuru/'.$g->id)}}" class="btn btn-danger delete-confirm"
                                             role="button"><i class="bi bi-trash3"></i></a>
                                         {{-- <button type="submit" class="btn btn-danger delete-confirm"><i
                                                 class="bi bi-trash3 pe-2"></i>Delete</button> --}}

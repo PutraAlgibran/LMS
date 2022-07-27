@@ -23,10 +23,10 @@ class AbsensiController extends Controller
     public function index()
     {
         if (Auth::user()->role !== 'Murid') {
-            $absensi = Absensi::all();
+            $absensi = Absensi::latest()->get();
             $isAbsen = '';
         } else if (Auth::user()->role == 'Murid') {
-            $absensi = Absensi::where('user_id', Auth::user()->id)->get();
+            $absensi = Absensi::where('user_id', Auth::user()->id)->latest()->get();
             $isAbsen = Absensi::where('user_id', Auth::user()->id)->whereDate('created_at', date('Y-m-d'))->first();
         }
 
@@ -43,11 +43,11 @@ class AbsensiController extends Controller
         $isAbsen = null;
         if (Auth::user()->role !== 'Murid') {
             if ($request->post('kelas_id') == null) {
-                $absensi = Absensi::whereDate('created_at', 'LIKE', $request->post('tanggal'))->get();
+                $absensi = Absensi::latest()->whereDate('created_at', 'LIKE', $request->post('tanggal'))->get();
             } else if ($request->post('tanggal') == null) {
-                $absensi = Absensi::where('kelas_id', 'LIKE', $request->post('kelas_id'))->get();
+                $absensi = Absensi::latest()->where('kelas_id', 'LIKE', $request->post('kelas_id'))->get();
             } else {
-                $absensi = Absensi::where('kelas_id', 'LIKE', $request->post('kelas_id'))
+                $absensi = Absensi::latest()->where('kelas_id', 'LIKE', $request->post('kelas_id'))
                     ->whereDate('created_at', 'LIKE', $request->post('tanggal'))->get();
             }
             if (count($absensi) == 0) {
@@ -64,7 +64,6 @@ class AbsensiController extends Controller
             'absensi' => $absensi,
             'isAbsen' => $isAbsen,
             'kelas' => Kelas::all(),
-
         ]);
     }
 
@@ -98,7 +97,7 @@ class AbsensiController extends Controller
 
             //return redirect()->back()
             return redirect()->back()
-                ->with('success', 'Users Created successfully!');
+                ->with('success', 'Kamu Telah Absen, Terima Kasih!');
         } catch (\Exception $e) {
             //return redirect()->back()
             return redirect()->back()
@@ -160,7 +159,7 @@ class AbsensiController extends Controller
             ->select('absensi.id', 'user.fullname', 'kelas.nama', 'absensi.status', 'absensi.keterangan', 'absensi.created_at')
             ->get();
 
-        $pdf = PDF::loadView('Absensi/absensiPDF', ['absensi' => $absensi]);
+        $pdf = PDF::loadView('absensi/absensiPDF', ['absensi' => $absensi]);
 
         return $pdf->download(date('d/m/y') . '_data_absensi.pdf');
     }

@@ -126,8 +126,12 @@ class TugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
+        $tugas = Tugas::find($id);
+        // $users = Murid::where('id', $id)->get();
+        // dd($users);
         return view('materidanTugas.editTugas', compact('tugas'));
     }
 
@@ -141,29 +145,31 @@ class TugasController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'nama' => 'required',
-            'kelas_id' => 'required',
             'jam_mulai' => 'required',
             'jam_berakhir' => 'required',
             'keterangan' => 'required',
-            'tugasUpload' => 'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:20000',
-            'materi_id' => 'required',
-            'guru_id' => 'required',
         ]);
-        $validatedData['materi_id'] = $request->post('materi_id');
-        $validatedData['guru_id'] = $request->post('guru_id');
-        $validatedData['kelas_id'] = $request->post('kelas_id');
 
         if ($tugas = $request->file('tugasUpload')) {
-            $destinationPath = 'assets/tugas';
+            $request->validate([
+                'tugasUpload' => 'file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:20000',
+            ]);
+
+            $cariTugas = Tugas::find($id);
+            $destinationPath = 'assets/materi/' . Materi::find($cariTugas->materi_id)->nama . '/' . $cariTugas->nama;
             $profileTugas = date('YmdHis') . "." . $tugas->getClientOriginalExtension();
             $tugas->move($destinationPath, $profileTugas);
             $validatedData['file'] = "$profileTugas";
+
+            if (!empty($cariTugas->file)) { //kondisi ada nama file di tabel
+                //hapus file lama
+                unlink('assets/materi/' . Materi::find($cariTugas->materi_id)->nama . '/' . $cariTugas->nama . '/' . $cariTugas->file);
+            }
         }
         try {
-            Tugas::update($validatedData);
+            Tugas::where('id', $id)->update($validatedData);
 
-            return redirect()->route('materidanTugas.detailTugas')
+            return redirect()->back()
                 ->with('success', 'Task Updated successfully!');
         } catch (\Exception $e) {
             return redirect()->back()
@@ -177,8 +183,16 @@ class TugasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tugas $tugas, $id)
     {
+        $cariTugas = Tugas::find($id);
+        if (!empty($cariTugas->file)) {
+            unlink('assets/materi/' . Materi::find($cariTugas->materi_id)->nama . '/' . $cariTugas->nama . '/' . $cariTugas->file);
+        }
+        $tugas->where('id', $id)->delete($id);
+
+        return redirect()->back()
+            ->with('success', 'Materi deleted successfully');
     }
 
     public function upload(Request $request, $id)

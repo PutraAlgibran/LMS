@@ -12,7 +12,7 @@
                             </div>
                             <img src="{{ asset('assets/img/avatars/book.jpg') }}" class="img-thumbnail">
                             <div class="card-body">
-                                <a style="font-size: 20px" href="{{ url("/detailMateri/$m->id") }}" class="card-link">Detail
+                                <a style="font-size: 20px" href="{{ url('/detailMapel/' . $m->id) }}" class="card-link">Detail
                                     Materi</a>
                             </div>
                         </div>

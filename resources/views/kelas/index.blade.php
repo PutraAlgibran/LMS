@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-lg-12 margin-tb">
                     <div align="center">
-                        <h3 class="display-3">Daftar Guru</h3>
+                        <h3 class="display-3">Daftar Kelas</h3>
                     </div>
                 </div>
             </div>
@@ -39,15 +39,15 @@
                                 <td>{{ $k->nama }}</td>
                                 <td class="text-center">
                                     <form action="" method="POST">
-                                        <a class="btn btn-info" href=""><i class="bi bi-eye pe-2"></i>Details</a>
+                                        <a class="btn btn-info" href=""><i class="bi bi-eye"></i></a>
                                         <a class="btn btn-primary" href="{{ url('/editKelas/' . $k->id) }}"><i
-                                                class="bi bi-pencil-square pe-2"></i>Edit</a>
+                                                class="bi bi-pencil-square"></i></a>
 
                                         @csrf
                                         @method('DELETE')
 
                                         <a href="/deleteGuru/{{ $k->id }}" class="btn btn-danger delete-confirm"
-                                            role="button"><i class="bi bi-trash3 pe-2"></i>Delete</a>
+                                            role="button"><i class="bi bi-trash3"></i></a>
                                         {{-- <button type="submit" class="btn btn-danger delete-confirm"><i
                                                 class="bi bi-trash3 pe-2"></i>Delete</button> --}}
                                     </form>

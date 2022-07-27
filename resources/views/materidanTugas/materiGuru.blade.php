@@ -5,15 +5,26 @@
             @foreach ($materi as $key => $m)
                 @if ($m->guru[0]->user_id == Auth::id() || Auth::user()->role == 'Admin')
                     <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="card h-100 text-center">
-                            <div class="card-body">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
                                 <h3 class="card-title">{{ $m->nama }}</h3>
                                 <h4 class="text-muted">{{ $m->kelas[0]->nama }}</h4>
                             </div>
                             <img src="{{ asset('assets/img/avatars/book.jpg') }}" class="img-thumbnail">
                             <div class="card-body">
-                                <a style="font-size: 20px" href="{{ url("/detailMateri/$m->id") }}"
-                                    class="card-link">Detail</a>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a class="btn btn-info" href="{{ url("/detailMapel/$m->id") }}"
+                                            class="card-link">Detail</a>
+                                        <a class="btn btn-warning" href="{{ url("/editMapel/$m->id") }}">Edit</a>
+
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <a href="{{ url('/deleteMapel/' . $m->id) }}" class="btn btn-danger delete-confirm"
+                                            role="button">Delete</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,7 +85,7 @@
                                                 <div class="row g-2">
                                                     <div class="col mb-0">
                                                         <label for="emailWithTitle" class="form-label">Keterangan
-                                                            Materi/Perkenalan</label>
+                                                            Mapel/Perkenalan</label>
                                                         <textarea rows="5" name="keterangan" class="form-control"
                                                             placeholder="Halo, Kita akan belajar bahasa inggris bersama selama 1 tahun kedepan ya, semangat semua"></textarea>
                                                     </div>

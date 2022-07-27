@@ -33,6 +33,28 @@
                 </div>
             </div>
             <br>
+            <div class="col-lg-6 col-md-6 col-sm-8 mb-2">
+                <form action="{{ url('/DataUser/search') }}" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-4 ps-4">
+                            <select name="role" class="form-control">
+                                <option selected value="">Pilih Role</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Guru">Guru</option>
+                                <option value="Murid">Murid</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" name="nama" placeholder="Cari User .." value="{{ old('cari') }}"
+                                class="form-control">
+                        </div>
+                        <div class="col-2">
+                            <input type="submit" value="CARI" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="table-responsive text-nowrap">
                 <table class="table">
                     <thead class="table-dark">
@@ -45,6 +67,9 @@
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
+                        @php
+                            $i = 0;
+                        @endphp
                         @foreach ($users as $user)
                             <tr>
                                 <th scope="row" class="text-center">{{ ++$i }}</th>

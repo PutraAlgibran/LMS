@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $users = users::latest()->paginate(100);
         return view('users.index', compact('users'))
-            ->with('i', (request()->input('page', 1) - 1) * 100);
+            ->with((request()->input('page', 1) - 1) * 100);
     }
 
     /**
@@ -185,5 +185,25 @@ class UserController extends Controller
     public function usersExcel()
     {
         return Excel::download(new UserExport, 'user.xlsx');
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->post('role') == null) {
+            $srch = users::where('fullname', 'LIKE', "%" . $request->post('nama') . "%")->get();
+        } else if ($request->post('nama') == null) {
+            $srch = users::where('role', 'LIKE', $request->post('role'))->get();
+        } else {
+            $srch = users::where('fullname', 'LIKE', "%" . $request->post('nama') . "%")
+                ->where('role', 'LIKE', $request->post('role'))->get();
+        }
+
+        if (count($srch) == 0) {
+            $srch = users::all();
+        }
+
+        return view('users.index', [
+            'users' => $srch,
+        ]);
     }
 }

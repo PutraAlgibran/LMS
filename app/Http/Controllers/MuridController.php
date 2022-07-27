@@ -19,7 +19,7 @@ class MuridController extends Controller
      */
     public function index()
     {
-        $murid = Murid::latest()->paginate(100);
+        $murid = Murid::latest()->get();
 
         return view('murid.index', [
             'murid' => $murid,
@@ -140,5 +140,26 @@ class MuridController extends Controller
     public function muridExcel()
     {
         return Excel::download(new MuridExport, 'murid.xlsx');
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->post('kelas_id') == null) {
+            $srch = Murid::where('nama', 'LIKE', "%" . $request->post('nama') . "%")->get();
+        } else if ($request->post('nama') == null) {
+            $srch = Murid::where('kelas_id', 'LIKE', $request->post('kelas_id'))->get();
+        } else {
+            $srch = Murid::where('nama', 'LIKE', "%" . $request->post('nama') . "%")
+                ->where('kelas_id', 'LIKE', $request->post('kelas_id'))->get();
+        }
+
+        if (count($srch) == 0) {
+            $srch = Murid::all();
+        }
+
+        return view('murid.index', [
+            'murid' => $srch,
+            'kelas' => Kelas::all(),
+        ]);
     }
 }

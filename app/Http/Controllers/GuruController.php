@@ -19,7 +19,7 @@ class GuruController extends Controller
      */
     public function index()
     {
-        $guru = Guru::latest()->paginate(100);
+        $guru = Guru::latest()->get();
         return view('guru.index', compact('guru'))
             ->with('i', (request()->input('page', 1) - 1) * 100);
     }
@@ -108,7 +108,7 @@ class GuruController extends Controller
             $guru->where('id', $id)->update($validatedData);
 
             return redirect()->back()
-                ->with('success', 'Guru created successfully!');
+                ->with('success', 'Guru Updated successfully!');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->with('error', 'Error during the creation!');
@@ -126,7 +126,7 @@ class GuruController extends Controller
         $guru->where('id', $id)->delete($id);
 
         return redirect()->back()
-            ->with('success', 'Users deleted successfully');
+            ->with('success', 'Guru deleted successfully');
     }
 
     public function guruPDF()
@@ -142,5 +142,17 @@ class GuruController extends Controller
     public function guruExcel()
     {
         return Excel::download(new GuruExport, 'guru.xlsx');
+    }
+
+    public function search(Request $request)
+    {
+        $srch = Guru::where('nama', 'LIKE', "%" . $request->post('cari') . "%")->get();
+        if (count($srch) == 0) {
+            $srch = Guru::all();
+        }
+
+        return view('guru.index', [
+            'guru' => $srch,
+        ]);
     }
 }

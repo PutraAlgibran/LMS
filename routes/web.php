@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class);
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
+// Search Data User
+Route::post('/DataUser/search', [UserController::class, 'search']);
 
 //Guru
 Route::get('/DataGuru', [GuruController::class, 'index']);
@@ -44,6 +46,8 @@ Route::get('/editGuru/{id}', [GuruController::class, 'edit']);
 Route::put('/editGuru/{id}', [GuruController::class, 'update']);
 // Delete Data Guru
 Route::get('/deleteGuru/{id}', [GuruController::class, 'destroy']);
+// Search Data Guru
+Route::post('/DataGuru/search', [GuruController::class, 'search']);
 
 
 //Murid
@@ -56,9 +60,8 @@ Route::get('/editMurid/{id}', [MuridController::class, 'edit']);
 Route::put('/editMurid/{id}', [MuridController::class, 'update']);
 // Delete Data Murid
 Route::get('/deleteMurid/{id}', [MuridController::class, 'destroy']);
-// Route::get('/materiUser', function () {
-//     return view('materidanTugas.materiUser');
-// });
+// Search Data Murid
+Route::post('/DataMurid/search', [MuridController::class, 'search']);
 
 // Kelas
 Route::get('/materiGuru', [KelasController::class, 'kelas']);
@@ -75,19 +78,30 @@ Route::get('/editKelas/{id}', [KelasController::class, 'edit']);
 Route::post('/editKelas/{id}', [KelasController::class, 'update']);
 
 // Materi
-Route::get("/detailMateri/{id}", [MateriController::class, 'show']);
+Route::get("/detailMapel/{id}", [MateriController::class, 'show']);
+Route::get("/editMapel/{id}", [MateriController::class, 'editMapel']);
+Route::put("/updateMapel/{id}", [MateriController::class, 'updateMapel']);
+Route::get("/deleteMapel/{id}", [MateriController::class, 'destroyMapel']);
 // Tambah Materi
-Route::get("/tambahMateri", [MateriController::class, 'store']);
+// Route::get("/tambahMateri", [MateriController::class, 'store']);
 Route::post("/tambahMataPelajaran", [MateriController::class, 'storeMapel']);
-// 
+
+// Tugas
 Route::get("/detailTugas/{materi_id}/{pertemuan_id}
 ", [TugasController::class, 'show']);
 Route::post("/tambahTugas", [TugasController::class, 'store']);
-
 Route::post("/uploadTugas/{id}", [TugasController::class, 'upload'])->name('uploadTugas');
+Route::get("/editTugas/{tugas_id}", [TugasController::class, 'edit']);
+Route::put("/updateTugas/{Tugas_id}", [TugasController::class, 'update']);
+Route::get("/deleteTugas/{Tugas_id}", [TugasController::class, 'destroy']);
 
+// Pertemuan
 Route::post("/storePertemuan/{id}", [MateriController::class, 'storePertemuan']);
+Route::get("/editPertemuan/{materi_id}/{pertemuan_id}", [MateriController::class, 'editPertemuan']);
+Route::put("/updatePertemuan/{materi_id}/{pertemuan_id}", [MateriController::class, 'updatePertemuan']);
+Route::get("/deletePertemuan/{materi_id}/{pertemuan_id}", [MateriController::class, 'destroyPertemuan']);
 
+// Absensi
 Route::get("/absensi/{nama}", [AbsensiController::class, 'index']);
 Route::post("absensi/store", [AbsensiController::class, 'store']);
 Route::post('/absensi/search/{nama}', [AbsensiController::class, 'search']);
@@ -103,7 +117,7 @@ Route::get('absensi-pdf', [AbsensiController::class, 'absensiPDF']);
 Route::get('murid-pdf', [MuridController::class, 'muridPDF']);
 Route::get('guru-pdf', [GuruController::class, 'guruPDF']);
 // routing url untuk mengunduh data user dalam format EXCEL
-Route::get('users-excel', [AbsensiController::class, 'usersExcel']);
+Route::get('users-excel', [UserController::class, 'usersExcel']);
 Route::get('absensi-excel', [AbsensiController::class, 'absensiExcel']);
 Route::get('murid-excel', [MuridController::class, 'muridExcel']);
 Route::get('guru-excel', [GuruController::class, 'guruExcel']);

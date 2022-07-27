@@ -90,14 +90,24 @@
                         </div>
                         <div class="accordion-body ">
                             <div class="mt-3">
-                                <a href="http://localhost:8000/assets/materi/{{ $materi->nama }}/{{ $p->file }}"
+                                <a href="http://alif.nurulfikri.com/lms/public/assets/materi/{{ $materi->nama }}/{{ $p->file }}"
                                     onclick="return confirm('Yakin Download Materi?');">Download Materi</a>
                             </div>
                             <div class="mt-3">
                                 <div class="row g-2">
-                                    <div class="col-lg-2 col-md-3 col-sm-4 mt-4">
-                                        <a class="btn btn-primary d-grid"
+                                    <div class="col-lg-12 mt-4">
+                                        <a class="btn btn-primary"
                                             href="{{ url("detailTugas/$p->materi_id/$p->id") }}">Lihat Tugas</a>
+                                        @if (Auth::user()->role == 'Guru')
+                                            <a class="btn btn-warning"
+                                                href="{{ url("/editPertemuan/$p->materi_id/$p->id") }}">Edit</a>
+
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <a href="{{ url("/deletePertemuan/$p->materi_id/$p->id") }}"
+                                                class="btn btn-danger delete-confirm" role="button">Delete</a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
